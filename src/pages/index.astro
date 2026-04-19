@@ -1,0 +1,144 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const CATEGORIES = ['bitcoin', 'ethereum', 'altcoins', 'defi', 'nft', 'regulation', 'market-analysis', 'web3'];
+
+const articles = await getCollection('articles', ({ data }) => !data.draft);
+articles.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
+---
+
+<Layout title="Metronome News — Crypto & Web3 journalism">
+	<main class="container home-page">
+		<h1 class="gradient-text site-title">🎵 Metronome News</h1>
+		<p class="site-tagline">Crypto & Web3 journalism with a steady beat.</p>
+
+		<section class="browse-section">
+			<h2 class="browse-title">Browse by category</h2>
+			<div class="category-chips">
+				{CATEGORIES.map((cat) => (
+					<a href={"/" + cat} class="chip">
+						{cat.replace("-", " ")}
+					</a>
+				))}
+			</div>
+		</section>
+
+		<h2 class="articles-heading">Articles ({articles.length})</h2>
+		<ul class="article-list">
+			{articles.map((article) => (
+				<li class="article-card">
+					<a href={"/" + article.data.category} class="category-link">
+						{article.data.category}
+					</a>
+					<h3 class="article-title">
+						<a href={"/article/" + article.id}>{article.data.title}</a>
+					</h3>
+					<p class="article-desc">{article.data.description}</p>
+					<div class="article-meta">
+						by {article.data.author} · {article.data.publishDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+					</div>
+				</li>
+			))}
+		</ul>
+	</main>
+</Layout>
+
+<style>
+	.home-page {
+		padding-block: 4rem;
+	}
+	.site-title {
+		text-align: center;
+		margin-bottom: 0.5rem;
+	}
+	.site-tagline {
+		text-align: center;
+		color: var(--color-text-muted);
+		font-size: 1.15rem;
+		margin-bottom: 3rem;
+	}
+
+	.browse-section {
+		margin-bottom: 3rem;
+	}
+	.browse-title {
+		margin-bottom: 1rem;
+		font-size: 1.1rem;
+		font-weight: 600;
+		color: var(--color-text-muted);
+	}
+	.category-chips {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+	.chip {
+		display: inline-block;
+		padding: 0.5rem 1rem;
+		background: var(--color-surface);
+		border: 1px solid var(--color-border);
+		border-radius: 2rem;
+		color: var(--color-text);
+		text-decoration: none;
+		font-size: 0.85rem;
+		font-weight: 500;
+		text-transform: capitalize;
+		transition: all 0.15s;
+	}
+	.chip:hover {
+		border-color: var(--color-accent);
+		color: var(--color-accent);
+	}
+
+	.articles-heading {
+		margin-bottom: 1.5rem;
+	}
+	.article-list {
+		list-style: none;
+		display: grid;
+		gap: 1rem;
+	}
+	.article-card {
+		padding: 1.5rem;
+		background: var(--color-surface);
+		border: 1px solid var(--color-border);
+		border-radius: 0.75rem;
+		transition: border-color 0.15s, transform 0.15s;
+	}
+	.article-card:hover {
+		border-color: var(--color-accent);
+		transform: translateY(-1px);
+	}
+	.category-link {
+		display: inline-block;
+		font-size: 0.75rem;
+		font-weight: 700;
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
+		color: var(--color-accent);
+		margin-bottom: 0.5rem;
+		text-decoration: none;
+	}
+	.category-link:hover {
+		color: var(--color-accent-warm);
+	}
+	.article-title {
+		margin-bottom: 0.5rem;
+	}
+	.article-title a {
+		color: var(--color-text);
+		text-decoration: none;
+	}
+	.article-title a:hover {
+		color: var(--color-accent);
+	}
+	.article-desc {
+		color: var(--color-text-muted);
+		margin-bottom: 0.75rem;
+	}
+	.article-meta {
+		font-size: 0.85rem;
+		color: var(--color-text-subtle);
+	}
+</style>

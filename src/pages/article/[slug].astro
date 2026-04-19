@@ -1,0 +1,276 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+
+// getStaticPaths — Astro вызовёт эту функцию при сборке.
+// Она должна вернуть массив всех URL-ов, которые нужно построить.
+export async function getStaticPaths() {
+	const articles = await getCollection('articles', ({ data }) => !data.draft);
+	return articles.map((article) => ({
+		params: { slug: article.id },
+		props: { article },
+	}));
+}
+
+interface Props {
+	article: CollectionEntry<'articles'>;
+}
+
+const { article } = Astro.props;
+const { Content } = await render(article);
+
+// Форматируем дату
+const formattedDate = article.data.publishDate.toLocaleDateString('en-US', {
+	year: 'numeric',
+	month: 'long',
+	day: 'numeric',
+});
+
+// Примерное время чтения — 200 слов в минуту
+const wordCount = article.body?.split(/\s+/).length || 0;
+const readingTime = Math.max(1, Math.ceil(wordCount / 200));
+---
+
+<Layout title={`${article.data.title} — Metronome News`} description={article.data.description}>
+	<article class="article-page">
+		<!-- Breadcrumbs -->
+		<nav class="breadcrumbs container" aria-label="Breadcrumb">
+			<a href="/">Home</a>
+			<span class="sep">›</span>
+			<a href={`/${article.data.category}`}>{article.data.category}</a>
+			<span class="sep">›</span>
+			<span class="current">{article.data.title}</span>
+		</nav>
+
+		<!-- Header -->
+		<header class="article-header container">
+			<div class="category-badge">{article.data.category}</div>
+			<h1 class="article-title">{article.data.title}</h1>
+			<p class="article-description">{article.data.description}</p>
+
+			<div class="article-meta">
+				<span>By <strong>{article.data.author}</strong></span>
+				<span class="dot">·</span>
+				<time datetime={article.data.publishDate.toISOString()}>{formattedDate}</time>
+				<span class="dot">·</span>
+				<span>{readingTime} min read</span>
+			</div>
+
+			{article.data.tags.length > 0 && (
+				<div class="article-tags">
+					{article.data.tags.map((tag) => (
+						<span class="tag">#{tag}</span>
+					))}
+				</div>
+			)}
+		</header>
+
+		<!-- AD SLOT 1 — reserved for future AdSense placement -->
+		<!-- <div class="ad-slot ad-slot-1"></div> -->
+
+		<!-- Article body -->
+		<div class="article-body container">
+			<Content />
+		</div>
+
+		<!-- AD SLOT 2 — reserved -->
+		<!-- <div class="ad-slot ad-slot-2"></div> -->
+
+		<!-- Footer: back to home + share buttons placeholder -->
+		<footer class="article-footer container">
+			<a href="/" class="back-link">← Back to all articles</a>
+		</footer>
+
+		<!-- AD SLOT 3 — reserved -->
+		<!-- <div class="ad-slot ad-slot-3"></div> -->
+	</article>
+</Layout>
+
+<style>
+	.article-page {
+		padding-block: 2rem 4rem;
+	}
+
+	/* Narrower container for comfortable reading width */
+	.article-page .container {
+		max-width: 780px;
+	}
+
+	/* Breadcrumbs */
+	.breadcrumbs {
+		font-size: 0.85rem;
+		color: var(--color-text-subtle);
+		margin-bottom: 2rem;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		align-items: center;
+	}
+	.breadcrumbs a {
+		color: var(--color-text-muted);
+	}
+	.breadcrumbs a:hover {
+		color: var(--color-accent);
+	}
+	.breadcrumbs .sep {
+		color: var(--color-text-subtle);
+		opacity: 0.5;
+	}
+	.breadcrumbs .current {
+		color: var(--color-text);
+		font-weight: 500;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		max-width: 300px;
+	}
+
+	/* Header */
+	.article-header {
+		margin-bottom: 2.5rem;
+	}
+	.category-badge {
+		display: inline-block;
+		font-size: 0.75rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--color-accent);
+		margin-bottom: 1rem;
+	}
+	.article-title {
+		font-size: clamp(1.75rem, 4vw, 2.75rem);
+		line-height: 1.15;
+		margin-bottom: 1rem;
+		color: var(--color-text);
+	}
+	.article-description {
+		font-size: 1.15rem;
+		line-height: 1.55;
+		color: var(--color-text-muted);
+		margin-bottom: 1.5rem;
+	}
+	.article-meta {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		align-items: center;
+		font-size: 0.9rem;
+		color: var(--color-text-subtle);
+		padding-bottom: 1.5rem;
+		border-bottom: 1px solid var(--color-border);
+	}
+	.article-meta strong {
+		color: var(--color-text);
+		font-weight: 600;
+	}
+	.article-meta .dot {
+		opacity: 0.5;
+	}
+
+	.article-tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.4rem;
+		margin-top: 1rem;
+	}
+	.tag {
+		display: inline-block;
+		padding: 0.25rem 0.6rem;
+		font-size: 0.75rem;
+		font-weight: 500;
+		background: var(--color-surface-alt);
+		color: var(--color-text-muted);
+		border-radius: 2rem;
+	}
+
+	/* Body — markdown content styling */
+	.article-body {
+		font-size: 1.05rem;
+		line-height: 1.75;
+		color: var(--color-text);
+	}
+	.article-body :global(h2) {
+		margin-top: 2.5rem;
+		margin-bottom: 1rem;
+	}
+	.article-body :global(h3) {
+		margin-top: 2rem;
+		margin-bottom: 0.75rem;
+	}
+	.article-body :global(p) {
+		margin-bottom: 1.25rem;
+	}
+	.article-body :global(ul),
+	.article-body :global(ol) {
+		margin: 1rem 0 1.5rem 1.5rem;
+	}
+	.article-body :global(li) {
+		margin-bottom: 0.5rem;
+	}
+	.article-body :global(a) {
+		color: var(--color-accent);
+		text-decoration: underline;
+		text-underline-offset: 2px;
+	}
+	.article-body :global(a:hover) {
+		color: var(--color-accent-warm);
+	}
+	.article-body :global(strong) {
+		font-weight: 700;
+		color: var(--color-text);
+	}
+	.article-body :global(em) {
+		font-style: italic;
+	}
+	.article-body :global(blockquote) {
+		border-left: 3px solid var(--color-accent);
+		padding-left: 1.25rem;
+		margin: 1.5rem 0;
+		font-style: italic;
+		color: var(--color-text-muted);
+	}
+	.article-body :global(code) {
+		background: var(--color-surface-alt);
+		padding: 0.15rem 0.4rem;
+		border-radius: 4px;
+		font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+		font-size: 0.9em;
+	}
+	.article-body :global(pre) {
+		background: var(--color-surface-alt);
+		padding: 1rem;
+		border-radius: 8px;
+		overflow-x: auto;
+		margin-bottom: 1.5rem;
+	}
+	.article-body :global(pre code) {
+		background: transparent;
+		padding: 0;
+	}
+	.article-body :global(img) {
+		border-radius: 8px;
+		margin-block: 1.5rem;
+	}
+	.article-body :global(hr) {
+		border: none;
+		border-top: 1px solid var(--color-border);
+		margin-block: 2.5rem;
+	}
+
+	/* Footer */
+	.article-footer {
+		margin-top: 3rem;
+		padding-top: 2rem;
+		border-top: 1px solid var(--color-border);
+	}
+	.back-link {
+		display: inline-block;
+		color: var(--color-text-muted);
+		font-weight: 500;
+	}
+	.back-link:hover {
+		color: var(--color-accent);
+	}
+</style>

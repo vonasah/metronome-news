@@ -1,0 +1,115 @@
+@import 'tailwindcss';
+
+/* ==================== THEME VARIABLES ==================== */
+:root {
+	/* Brand colors */
+	--color-accent: #3b82f6;
+	--color-accent-warm: #f97316;
+	--gradient-brand: linear-gradient(135deg, #3b82f6 0%, #f97316 100%);
+
+	/* Importance indicators */
+	--color-important-high: #dc2626;
+	--color-important-mid: #f97316;
+	--color-important-low: #22c55e;
+
+	/* Light theme (default) */
+	--color-bg: #f8fafc;
+	--color-surface: #ffffff;
+	--color-surface-alt: #f1f5f9;
+	--color-text: #0f172a;
+	--color-text-muted: #475569;
+	--color-text-subtle: #64748b;
+	--color-border: #e2e8f0;
+	--color-border-strong: #cbd5e1;
+}
+
+/* Dark theme */
+html.dark {
+	--color-bg: #0f172a;
+	--color-surface: #1e293b;
+	--color-surface-alt: #334155;
+	--color-text: #f1f5f9;
+	--color-text-muted: #cbd5e1;
+	--color-text-subtle: #94a3b8;
+	--color-border: #334155;
+	--color-border-strong: #475569;
+}
+
+/* ==================== RESET ==================== */
+*,
+*::before,
+*::after {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html {
+	-webkit-text-size-adjust: 100%;
+	scroll-behavior: smooth;
+}
+
+body {
+	background: var(--color-bg);
+	color: var(--color-text);
+	font-family: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+	font-feature-settings: 'cv11', 'ss01'; /* Nicer digits & stylistic alternates in Inter */
+	line-height: 1.6;
+	font-size: 16px;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	transition: background 0.2s, color 0.2s;
+}
+
+/* ==================== TYPOGRAPHY ==================== */
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'Inter Variable', sans-serif;
+	color: var(--color-text);
+	line-height: 1.2;
+	letter-spacing: -0.02em;
+	font-weight: 700;
+}
+
+h1 { font-size: clamp(2rem, 5vw, 3rem); }
+h2 { font-size: clamp(1.5rem, 3.5vw, 2.25rem); }
+h3 { font-size: clamp(1.25rem, 2.5vw, 1.75rem); }
+h4 { font-size: 1.25rem; }
+
+p {
+	color: var(--color-text);
+	font-size: 1rem;
+}
+
+a {
+	color: var(--color-accent);
+	text-decoration: none;
+	transition: color 0.15s;
+}
+a:hover { text-decoration: underline; }
+
+img {
+	max-width: 100%;
+	height: auto;
+	display: block;
+}
+
+/* ==================== UTILITIES ==================== */
+.gradient-text {
+	background: var(--gradient-brand);
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+}
+
+.container {
+	width: 100%;
+	max-width: 1200px;
+	margin-inline: auto;
+	padding-inline: 1.5rem;
+}
+
+/* Selection color */
+::selection {
+	background: var(--color-accent);
+	color: white;
+}
