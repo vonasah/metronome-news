@@ -3,8 +3,6 @@ import Layout from '../../layouts/Layout.astro';
 import { getCollection, render } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 
-// getStaticPaths — Astro вызовёт эту функцию при сборке.
-// Она должна вернуть массив всех URL-ов, которые нужно построить.
 export async function getStaticPaths() {
 	const articles = await getCollection('articles', ({ data }) => !data.draft);
 	return articles.map((article) => ({
@@ -20,32 +18,40 @@ interface Props {
 const { article } = Astro.props;
 const { Content } = await render(article);
 
-// Форматируем дату
 const formattedDate = article.data.publishDate.toLocaleDateString('en-US', {
 	year: 'numeric',
 	month: 'long',
 	day: 'numeric',
 });
 
-// Примерное время чтения — 200 слов в минуту
 const wordCount = article.body?.split(/\s+/).length || 0;
 const readingTime = Math.max(1, Math.ceil(wordCount / 200));
+
+const categoryTitle = article.data.category
+	.split('-')
+	.map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+	.join(' ');
+
+const categoryHref = "/" + article.data.category;
+const backHref = categoryHref;
+const backLabel = "← Back to " + categoryTitle;
 ---
 
-<Layout title={`${article.data.title} — Metronome News`} description={article.data.description}>
+<Layout
+	title={article.data.title + " — Metronome News"}
+	description={article.data.description}
+>
 	<article class="article-page">
-		<!-- Breadcrumbs -->
 		<nav class="breadcrumbs container" aria-label="Breadcrumb">
 			<a href="/">Home</a>
 			<span class="sep">›</span>
-			<a href={`/${article.data.category}`}>{article.data.category}</a>
+			<a href={categoryHref}>{categoryTitle}</a>
 			<span class="sep">›</span>
 			<span class="current">{article.data.title}</span>
 		</nav>
 
-		<!-- Header -->
 		<header class="article-header container">
-			<div class="category-badge">{article.data.category}</div>
+			<a href={categoryHref} class="category-link">{categoryTitle}</a>
 			<h1 class="article-title">{article.data.title}</h1>
 			<p class="article-description">{article.data.description}</p>
 
@@ -66,24 +72,13 @@ const readingTime = Math.max(1, Math.ceil(wordCount / 200));
 			)}
 		</header>
 
-		<!-- AD SLOT 1 — reserved for future AdSense placement -->
-		<!-- <div class="ad-slot ad-slot-1"></div> -->
-
-		<!-- Article body -->
 		<div class="article-body container">
 			<Content />
 		</div>
 
-		<!-- AD SLOT 2 — reserved -->
-		<!-- <div class="ad-slot ad-slot-2"></div> -->
-
-		<!-- Footer: back to home + share buttons placeholder -->
 		<footer class="article-footer container">
-			<a href="/" class="back-link">← Back to all articles</a>
+			<a href={backHref} class="back-link" id="backLink">{backLabel}</a>
 		</footer>
-
-		<!-- AD SLOT 3 — reserved -->
-		<!-- <div class="ad-slot ad-slot-3"></div> -->
 	</article>
 </Layout>
 
@@ -91,13 +86,10 @@ const readingTime = Math.max(1, Math.ceil(wordCount / 200));
 	.article-page {
 		padding-block: 2rem 4rem;
 	}
-
-	/* Narrower container for comfortable reading width */
 	.article-page .container {
 		max-width: 780px;
 	}
 
-	/* Breadcrumbs */
 	.breadcrumbs {
 		font-size: 0.85rem;
 		color: var(--color-text-subtle);
@@ -109,13 +101,13 @@ const readingTime = Math.max(1, Math.ceil(wordCount / 200));
 	}
 	.breadcrumbs a {
 		color: var(--color-text-muted);
+		text-decoration: none;
 	}
 	.breadcrumbs a:hover {
 		color: var(--color-accent);
 	}
 	.breadcrumbs .sep {
-		color: var(--color-text-subtle);
-		opacity: 0.5;
+		opacity: 0.4;
 	}
 	.breadcrumbs .current {
 		color: var(--color-text);
@@ -126,11 +118,10 @@ const readingTime = Math.max(1, Math.ceil(wordCount / 200));
 		max-width: 300px;
 	}
 
-	/* Header */
 	.article-header {
 		margin-bottom: 2.5rem;
 	}
-	.category-badge {
+	.category-link {
 		display: inline-block;
 		font-size: 0.75rem;
 		font-weight: 700;
@@ -138,12 +129,18 @@ const readingTime = Math.max(1, Math.ceil(wordCount / 200));
 		text-transform: uppercase;
 		color: var(--color-accent);
 		margin-bottom: 1rem;
+		text-decoration: none;
+	}
+	.category-link:hover {
+		text-decoration: underline;
 	}
 	.article-title {
-		font-size: clamp(1.75rem, 4vw, 2.75rem);
+		font-size: clamp(1.75rem, 4vw, 2.85rem);
 		line-height: 1.15;
+		letter-spacing: -0.02em;
 		margin-bottom: 1rem;
 		color: var(--color-text);
+		font-weight: 800;
 	}
 	.article-description {
 		font-size: 1.15rem;
@@ -177,7 +174,7 @@ const readingTime = Math.max(1, Math.ceil(wordCount / 200));
 	}
 	.tag {
 		display: inline-block;
-		padding: 0.25rem 0.6rem;
+		padding: 0.25rem 0.7rem;
 		font-size: 0.75rem;
 		font-weight: 500;
 		background: var(--color-surface-alt);
@@ -185,17 +182,19 @@ const readingTime = Math.max(1, Math.ceil(wordCount / 200));
 		border-radius: 2rem;
 	}
 
-	/* Body — markdown content styling */
 	.article-body {
-		font-size: 1.05rem;
+		font-size: 1.075rem;
 		line-height: 1.75;
 		color: var(--color-text);
 	}
 	.article-body :global(h2) {
+		font-size: 1.75rem;
 		margin-top: 2.5rem;
 		margin-bottom: 1rem;
+		line-height: 1.25;
 	}
 	.article-body :global(h3) {
+		font-size: 1.35rem;
 		margin-top: 2rem;
 		margin-bottom: 0.75rem;
 	}
@@ -212,7 +211,7 @@ const readingTime = Math.max(1, Math.ceil(wordCount / 200));
 	.article-body :global(a) {
 		color: var(--color-accent);
 		text-decoration: underline;
-		text-underline-offset: 2px;
+		text-underline-offset: 3px;
 	}
 	.article-body :global(a:hover) {
 		color: var(--color-accent-warm);
@@ -259,7 +258,6 @@ const readingTime = Math.max(1, Math.ceil(wordCount / 200));
 		margin-block: 2.5rem;
 	}
 
-	/* Footer */
 	.article-footer {
 		margin-top: 3rem;
 		padding-top: 2rem;
@@ -269,8 +267,35 @@ const readingTime = Math.max(1, Math.ceil(wordCount / 200));
 		display: inline-block;
 		color: var(--color-text-muted);
 		font-weight: 500;
+		text-decoration: none;
 	}
 	.back-link:hover {
 		color: var(--color-accent);
 	}
 </style>
+
+<script>
+	function initBackLink() {
+		const backLink = document.getElementById('backLink');
+		if (!backLink) return;
+
+		const referrer = document.referrer;
+		const ourOrigin = window.location.origin;
+
+		if (referrer && referrer.startsWith(ourOrigin)) {
+			const referrerPath = new URL(referrer).pathname;
+			const currentPath = window.location.pathname;
+
+			if (referrerPath !== currentPath && referrerPath === '/') {
+				backLink.textContent = '← Back to home';
+				backLink.setAttribute('href', '/');
+			}
+		}
+	}
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initBackLink);
+	} else {
+		initBackLink();
+	}
+</script>
