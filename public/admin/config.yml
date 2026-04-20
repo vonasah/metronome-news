@@ -1,0 +1,46 @@
+local_backend: true
+
+backend:
+  name: github
+  repo: vonasah/metronome-news
+  branch: main
+
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "articles"
+    label: "Articles"
+    label_singular: "Article"
+    folder: "src/content/articles"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Publish date", name: "publishDate", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
+      - { label: "Author", name: "author", widget: "string", default: "raptor" }
+      - label: "Category"
+        name: "category"
+        widget: "select"
+        options:
+          - { label: "Bitcoin", value: "bitcoin" }
+          - { label: "Ethereum", value: "ethereum" }
+          - { label: "Altcoins", value: "altcoins" }
+          - { label: "DeFi", value: "defi" }
+          - { label: "NFT", value: "nft" }
+          - { label: "Regulation", value: "regulation" }
+          - { label: "Market Analysis", value: "market-analysis" }
+          - { label: "Web3", value: "web3" }
+        default: "bitcoin"
+      - { label: "Tags", name: "tags", widget: "list", default: [] }
+      - { label: "Featured image", name: "image", widget: "image", required: false }
+      - { label: "Featured on homepage", name: "featured", widget: "boolean", default: false }
+      - { label: "Draft", name: "draft", widget: "boolean", default: true }
+      - label: "Body"
+        name: "body"
+        widget: "markdown"
+        modes: ["rich_text", "raw"]
+        buttons: ["bold", "italic", "link", "heading-two", "heading-three", "quote", "bulleted-list", "numbered-list", "code"]

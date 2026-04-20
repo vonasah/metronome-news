@@ -1,10 +1,14 @@
 ---
-title: "Hello Crypto World — Metronome News is live"
-description: "Metronome News launches as a modern crypto and Web3 publication. Here's what to expect from our coverage in the coming months."
+title: '"Hello Crypto World — Metronome News is LIVE! (edited)"'
+description: Metronome News launches as a modern crypto and Web3 publication.
+  Here's what to expect from our coverage in the coming months.
 publishDate: 2026-04-19
-author: "raptor"
-category: "bitcoin"
-tags: ["metronome", "launch", "web3"]
+author: raptor
+category: bitcoin
+tags:
+  - metronome
+  - launch
+  - web3
 featured: true
 draft: false
 ---
