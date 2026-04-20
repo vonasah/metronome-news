@@ -1,0 +1,243 @@
+---
+const CATEGORIES = [
+	{ slug: 'bitcoin', label: 'Bitcoin' },
+	{ slug: 'ethereum', label: 'Ethereum' },
+	{ slug: 'altcoins', label: 'Altcoins' },
+	{ slug: 'defi', label: 'DeFi' },
+	{ slug: 'nft', label: 'NFT' },
+	{ slug: 'regulation', label: 'Regulation' },
+	{ slug: 'market-analysis', label: 'Markets' },
+	{ slug: 'web3', label: 'Web3' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="site-header">
+	<div class="header-inner container">
+		<a href="/" class="logo" aria-label="Metronome News — home">
+			<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" class="logo-icon">
+				<defs>
+					<linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+						<stop offset="0%" stop-color="#3b82f6"/>
+						<stop offset="100%" stop-color="#f97316"/>
+					</linearGradient>
+				</defs>
+				<rect width="64" height="64" rx="12" fill="url(#logoGrad)"/>
+				<path d="M20 50 L44 50 L36 14 L28 14 Z" fill="none" stroke="white" stroke-width="3" stroke-linejoin="round"/>
+				<line x1="32" y1="50" x2="22" y2="22" stroke="white" stroke-width="3" stroke-linecap="round"/>
+				<circle cx="22" cy="22" r="3" fill="white"/>
+			</svg>
+			<div class="logo-text">
+				<span class="logo-name">Metronome</span>
+				<span class="logo-sub">News</span>
+			</div>
+		</a>
+
+		<button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">
+			<span></span><span></span><span></span>
+		</button>
+
+		<nav class="main-nav" id="mainNav" aria-label="Main navigation">
+			<ul>
+				{CATEGORIES.map((cat) => {
+					const href = "/" + cat.slug;
+					const isActive = currentPath === href;
+					return (
+						<li>
+							<a href={href} class={isActive ? "nav-link active" : "nav-link"}>
+								{cat.label}
+							</a>
+						</li>
+					);
+				})}
+			</ul>
+		</nav>
+
+		<button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+			<svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+				<circle cx="12" cy="12" r="4"/>
+				<path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+			</svg>
+			<svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+				<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+			</svg>
+		</button>
+	</div>
+</header>
+
+<style>
+	.site-header {
+		position: sticky;
+		top: 0;
+		z-index: 100;
+		background: var(--color-surface);
+		border-bottom: 1px solid var(--color-border);
+		backdrop-filter: saturate(180%) blur(8px);
+	}
+
+	.header-inner {
+		display: flex;
+		align-items: center;
+		gap: 2rem;
+		padding-block: 0.85rem;
+	}
+
+	.logo {
+		display: flex;
+		align-items: center;
+		gap: 0.6rem;
+		text-decoration: none;
+		flex-shrink: 0;
+	}
+	.logo-icon {
+		width: 36px;
+		height: 36px;
+	}
+	.logo-text {
+		display: flex;
+		flex-direction: column;
+		line-height: 1.05;
+	}
+	.logo-name {
+		font-weight: 800;
+		font-size: 1.1rem;
+		letter-spacing: -0.02em;
+		background: var(--gradient-brand);
+		-webkit-background-clip: text;
+		background-clip: text;
+		color: transparent;
+	}
+	.logo-sub {
+		font-size: 0.65rem;
+		font-weight: 500;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--color-text-subtle);
+	}
+
+	.main-nav {
+		flex: 1;
+	}
+	.main-nav ul {
+		list-style: none;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.25rem;
+		margin: 0;
+		padding: 0;
+	}
+	.nav-link {
+		display: block;
+		padding: 0.45rem 0.8rem;
+		color: var(--color-text-muted);
+		text-decoration: none;
+		font-size: 0.88rem;
+		font-weight: 500;
+		border-radius: 0.5rem;
+		transition: background 0.15s, color 0.15s;
+	}
+	.nav-link:hover {
+		color: var(--color-text);
+		background: var(--color-surface-alt);
+	}
+	.nav-link.active {
+		color: var(--color-accent);
+		background: var(--color-surface-alt);
+	}
+
+	.theme-toggle {
+		width: 36px;
+		height: 36px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: var(--color-surface-alt);
+		border: 1px solid var(--color-border);
+		border-radius: 0.5rem;
+		cursor: pointer;
+		color: var(--color-text-muted);
+		transition: all 0.15s;
+		flex-shrink: 0;
+	}
+	.theme-toggle:hover {
+		color: var(--color-accent);
+		border-color: var(--color-accent);
+	}
+	.theme-toggle svg {
+		width: 18px;
+		height: 18px;
+	}
+	.sun-icon { display: none; }
+	.moon-icon { display: block; }
+	:global(html.dark) .sun-icon { display: block; }
+	:global(html.dark) .moon-icon { display: none; }
+
+	.menu-toggle {
+		display: none;
+		width: 36px;
+		height: 36px;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		gap: 4px;
+		background: transparent;
+		border: none;
+		cursor: pointer;
+		padding: 0;
+		margin-left: auto;
+	}
+	.menu-toggle span {
+		display: block;
+		width: 22px;
+		height: 2px;
+		background: var(--color-text);
+		border-radius: 2px;
+		transition: transform 0.2s, opacity 0.2s;
+	}
+
+	@media (max-width: 768px) {
+		.header-inner {
+			flex-wrap: wrap;
+			gap: 0.75rem;
+		}
+		.menu-toggle { display: flex; }
+		.theme-toggle { margin-left: 0; }
+		.main-nav {
+			flex-basis: 100%;
+			display: none;
+		}
+		.main-nav.open {
+			display: block;
+		}
+		.main-nav ul {
+			flex-direction: column;
+			gap: 0.1rem;
+			padding-top: 0.5rem;
+			border-top: 1px solid var(--color-border);
+		}
+		.nav-link {
+			padding: 0.6rem 0.75rem;
+		}
+	}
+</style>
+
+<script>
+	const THEME_KEY = 'metronome-theme';
+	const root = document.documentElement;
+	const themeToggle = document.getElementById('themeToggle');
+
+	const savedTheme = localStorage.getItem(THEME_KEY);
+	if (savedTheme === 'dark' ||
+		(!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+		root.classList.add('dark');
+	}
+
+	themeToggle?.addEventListener('click', () => {
+		const isDark = root.classList.toggle('dark');
+		localStorage.setItem(THEME_KEY, isDark ? 'dark' : 'light');
+	});
+
+	const menuToggle = document.getElementById('menuToggle');
+	const mainNav = document.getElementById('mainNav');
+	menuToggle?.addEvent
