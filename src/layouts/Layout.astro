@@ -7,12 +7,57 @@ import Footer from '../components/Footer.astro';
 interface Props {
 	title?: string;
 	description?: string;
+	image?: string;
+	type?: 'website' | 'article';
+	publishDate?: Date;
+	author?: string;
 }
 
 const {
 	title = 'Metronome News',
-	description = 'Crypto & Web3 news with a steady beat.',
+	description = 'Crypto & Web3 journalism with a steady beat. Independent, ad-free, reader-funded.',
+	image,
+	type = 'website',
+	publishDate,
+	author,
 } = Astro.props;
+
+// Canonical URL — абсолютный путь к текущей странице
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+// Open Graph image: либо переданная, либо fallback (лого)
+const ogImage = image
+	? new URL(image, Astro.site).toString()
+	: new URL('/og-default.svg', Astro.site).toString();
+
+// JSON-LD для статей — структурированные данные для Google
+const jsonLd = type === 'article' ? {
+	'@context': 'https://schema.org',
+	'@type': 'NewsArticle',
+	headline: title,
+	description: description,
+	image: ogImage,
+	datePublished: publishDate?.toISOString(),
+	author: {
+		'@type': 'Person',
+		name: author || 'raptor',
+	},
+	publisher: {
+		'@type': 'Organization',
+		name: 'Metronome News',
+		logo: {
+			'@type': 'ImageObject',
+			url: new URL('/favicon.svg', Astro.site).toString(),
+		},
+	},
+	mainEntityOfPage: canonicalURL.toString(),
+} : {
+	'@context': 'https://schema.org',
+	'@type': 'WebSite',
+	name: 'Metronome News',
+	url: Astro.site?.toString(),
+	description: description,
+};
 ---
 
 <!doctype html>
@@ -20,14 +65,46 @@ const {
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta name="description" content={description} />
 		<meta name="generator" content={Astro.generator} />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+		<!-- Basic SEO -->
 		<title>{title}</title>
+		<meta name="description" content={description} />
+		<link rel="canonical" href={canonicalURL} />
+
+		<!-- Icons -->
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="apple-touch-icon" href="/favicon.svg" />
+		<meta name="theme-color" content="#3b82f6" />
+
+		<!-- Open Graph -->
+		<meta property="og:type" content={type} />
+		<meta property="og:url" content={canonicalURL} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={ogImage} />
+		<meta property="og:site_name" content="Metronome News" />
+
+		<!-- Twitter -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={ogImage} />
+
+		<!-- Article-specific OG -->
+		{type === 'article' && publishDate && (
+			<meta property="article:published_time" content={publishDate.toISOString()} />
+		)}
+		{type === 'article' && author && (
+			<meta property="article:author" content={author} />
+		)}
+
+		<!-- JSON-LD structured data -->
+		<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 	</head>
-<body>
-	<Header />
-	<slot />
-	<Footer />
-</body>
+	<body>
+		<Header />
+		<slot />
+		<Footer />
+	</body>
 </html>
