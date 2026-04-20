@@ -1,0 +1,208 @@
+---
+const CATEGORIES = [
+	{ slug: 'bitcoin', label: 'Bitcoin' },
+	{ slug: 'ethereum', label: 'Ethereum' },
+	{ slug: 'altcoins', label: 'Altcoins' },
+	{ slug: 'defi', label: 'DeFi' },
+	{ slug: 'nft', label: 'NFT' },
+	{ slug: 'regulation', label: 'Regulation' },
+	{ slug: 'market-analysis', label: 'Markets' },
+	{ slug: 'web3', label: 'Web3' },
+];
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+	<div class="footer-inner container">
+		<div class="footer-top">
+			<!-- Brand -->
+			<div class="footer-brand">
+				<div class="footer-logo">
+					<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" class="footer-icon">
+						<defs>
+							<linearGradient id="footerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+								<stop offset="0%" stop-color="#3b82f6"/>
+								<stop offset="100%" stop-color="#f97316"/>
+							</linearGradient>
+						</defs>
+						<rect width="64" height="64" rx="12" fill="url(#footerGrad)"/>
+						<path d="M20 50 L44 50 L36 14 L28 14 Z" fill="none" stroke="white" stroke-width="3" stroke-linejoin="round"/>
+						<line x1="32" y1="50" x2="22" y2="22" stroke="white" stroke-width="3" stroke-linecap="round"/>
+						<circle cx="22" cy="22" r="3" fill="white"/>
+					</svg>
+					<div class="footer-logo-text">
+						<span class="footer-brand-name">Metronome</span>
+						<span class="footer-brand-sub">News</span>
+					</div>
+				</div>
+				<p class="footer-tagline">
+					Crypto &amp; Web3 journalism with a steady beat. Independent, ad-free, reader-funded.
+				</p>
+			</div>
+
+			<!-- Categories column -->
+			<div class="footer-column">
+				<h4 class="footer-heading">Categories</h4>
+				<ul class="footer-links">
+					{CATEGORIES.map((cat) => {
+						const href = "/" + cat.slug;
+						return (
+							<li><a href={href}>{cat.label}</a></li>
+						);
+					})}
+				</ul>
+			</div>
+
+			<!-- About column -->
+			<div class="footer-column">
+				<h4 class="footer-heading">Metronome</h4>
+				<ul class="footer-links">
+					<li><a href="/about">About</a></li>
+					<li><a href="/contact">Contact</a></li>
+					<li><a href="/newsletter">Newsletter</a></li>
+					<li><a href="/rss.xml">RSS feed</a></li>
+				</ul>
+			</div>
+
+			<!-- Legal column -->
+			<div class="footer-column">
+				<h4 class="footer-heading">Legal</h4>
+				<ul class="footer-links">
+					<li><a href="/privacy">Privacy policy</a></li>
+					<li><a href="/terms">Terms of use</a></li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="footer-bottom">
+			<p class="footer-copyright">
+				© {currentYear} Metronome News. All rights reserved.
+			</p>
+			<p class="footer-made">
+				Built with Astro · Designed for readers, not algorithms.
+			</p>
+		</div>
+	</div>
+</footer>
+
+<style>
+	.site-footer {
+		margin-top: 5rem;
+		padding-block: 3rem 2rem;
+		background: var(--color-surface);
+		border-top: 1px solid var(--color-border);
+	}
+
+	.footer-top {
+		display: grid;
+		grid-template-columns: 1.6fr 1fr 1fr 1fr;
+		gap: 2.5rem;
+		padding-bottom: 2.5rem;
+		border-bottom: 1px solid var(--color-border);
+	}
+
+	.footer-brand {
+		max-width: 320px;
+	}
+
+	.footer-logo {
+		display: flex;
+		align-items: center;
+		gap: 0.6rem;
+		margin-bottom: 1rem;
+	}
+	.footer-icon {
+		width: 36px;
+		height: 36px;
+	}
+	.footer-logo-text {
+		display: flex;
+		flex-direction: column;
+		line-height: 1.05;
+	}
+	.footer-brand-name {
+		font-weight: 800;
+		font-size: 1.1rem;
+		letter-spacing: -0.02em;
+		background: var(--gradient-brand);
+		-webkit-background-clip: text;
+		background-clip: text;
+		color: transparent;
+	}
+	.footer-brand-sub {
+		font-size: 0.65rem;
+		font-weight: 500;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--color-text-subtle);
+	}
+
+	.footer-tagline {
+		color: var(--color-text-muted);
+		font-size: 0.9rem;
+		line-height: 1.55;
+	}
+
+	.footer-heading {
+		font-size: 0.8rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--color-text-subtle);
+		margin-bottom: 1rem;
+	}
+
+	.footer-links {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+	.footer-links a {
+		color: var(--color-text-muted);
+		text-decoration: none;
+		font-size: 0.9rem;
+		transition: color 0.15s;
+	}
+	.footer-links a:hover {
+		color: var(--color-accent);
+	}
+
+	.footer-bottom {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-top: 2rem;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+	}
+	.footer-copyright,
+	.footer-made {
+		font-size: 0.8rem;
+		color: var(--color-text-subtle);
+		margin: 0;
+	}
+
+	@media (max-width: 900px) {
+		.footer-top {
+			grid-template-columns: 1fr 1fr;
+			gap: 2rem;
+		}
+		.footer-brand {
+			grid-column: 1 / -1;
+			max-width: none;
+		}
+	}
+
+	@media (max-width: 500px) {
+		.footer-top {
+			grid-template-columns: 1fr;
+		}
+		.footer-bottom {
+			justify-content: flex-start;
+		}
+	}
+</style>

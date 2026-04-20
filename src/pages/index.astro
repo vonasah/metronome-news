@@ -2,143 +2,342 @@
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
-const CATEGORIES = ['bitcoin', 'ethereum', 'altcoins', 'defi', 'nft', 'regulation', 'market-analysis', 'web3'];
+// Получаем все не-черновые статьи
+const allArticles = await getCollection('articles', ({ data }) => !data.draft);
+allArticles.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
 
-const articles = await getCollection('articles', ({ data }) => !data.draft);
-articles.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
+// Hero: первая featured-статья, или самая свежая, если нет featured
+const heroArticle = allArticles.find((a) => a.data.featured) || allArticles[0];
+
+// Остальные статьи (без hero) для сетки
+const otherArticles = heroArticle
+	? allArticles.filter((a) => a.id !== heroArticle.id)
+	: [];
+
+// Форматирование даты
+function formatDate(date) {
+	return date.toLocaleDateString('en-US', {
+		year: 'numeric',
+		month: 'short',
+		day: 'numeric',
+	});
+}
+
+// Название категории с заглавной
+function prettyCategory(slug) {
+	return slug
+		.split('-')
+		.map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+		.join(' ');
+}
 ---
 
 <Layout title="Metronome News — Crypto & Web3 journalism">
-	<main class="container home-page">
-		<h1 class="gradient-text site-title">🎵 Metronome News</h1>
-		<p class="site-tagline">Crypto & Web3 journalism with a steady beat.</p>
-
-		<section class="browse-section">
-			<h2 class="browse-title">Browse by category</h2>
-			<div class="category-chips">
-				{CATEGORIES.map((cat) => (
-					<a href={"/" + cat} class="chip">
-						{cat.replace("-", " ")}
-					</a>
-				))}
-			</div>
-		</section>
-
-		<h2 class="articles-heading">Articles ({articles.length})</h2>
-		<ul class="article-list">
-			{articles.map((article) => (
-				<li class="article-card">
-					<a href={"/" + article.data.category} class="category-link">
-						{article.data.category}
-					</a>
-					<h3 class="article-title">
-						<a href={"/article/" + article.id}>{article.data.title}</a>
-					</h3>
-					<p class="article-desc">{article.data.description}</p>
-					<div class="article-meta">
-						by {article.data.author} · {article.data.publishDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+	<main class="home">
+		{heroArticle ? (
+			<section class="hero container">
+				<a href={"/article/" + heroArticle.id} class="hero-card">
+					<div class="hero-content">
+						<div class="hero-tags">
+							<span class="hero-category">{prettyCategory(heroArticle.data.category)}</span>
+							{heroArticle.data.featured && (
+								<span class="hero-featured-badge">★ Featured</span>
+							)}
+						</div>
+						<h1 class="hero-title">{heroArticle.data.title}</h1>
+						<p class="hero-description">{heroArticle.data.description}</p>
+						<div class="hero-meta">
+							<span>By <strong>{heroArticle.data.author}</strong></span>
+							<span class="sep">·</span>
+							<time datetime={heroArticle.data.publishDate.toISOString()}>
+								{formatDate(heroArticle.data.publishDate)}
+							</time>
+						</div>
+						<span class="hero-cta">Read article →</span>
 					</div>
-				</li>
-			))}
-		</ul>
+				</a>
+			</section>
+		) : (
+			<section class="empty-state container">
+				<div class="empty-card">
+					<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" class="empty-icon">
+						<defs>
+							<linearGradient id="emptyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+								<stop offset="0%" stop-color="#3b82f6"/>
+								<stop offset="100%" stop-color="#f97316"/>
+							</linearGradient>
+						</defs>
+						<rect width="64" height="64" rx="12" fill="url(#emptyGrad)"/>
+						<path d="M20 50 L44 50 L36 14 L28 14 Z" fill="none" stroke="white" stroke-width="3" stroke-linejoin="round"/>
+						<line x1="32" y1="50" x2="22" y2="22" stroke="white" stroke-width="3" stroke-linecap="round"/>
+						<circle cx="22" cy="22" r="3" fill="white"/>
+					</svg>
+					<h1>🎵 Tuning the rhythm...</h1>
+					<p>First articles drop soon. Come back in a few days.</p>
+				</div>
+			</section>
+		)}
+
+		{otherArticles.length > 0 && (
+			<section class="latest container">
+				<div class="latest-header">
+					<h2>Latest articles</h2>
+					<span class="latest-count">{otherArticles.length} {otherArticles.length === 1 ? 'article' : 'articles'}</span>
+				</div>
+
+				<div class="article-grid">
+					{otherArticles.map((article) => {
+						const href = "/article/" + article.id;
+						return (
+							<a href={href} class="article-card">
+								<div class="card-category">{prettyCategory(article.data.category)}</div>
+								<h3 class="card-title">{article.data.title}</h3>
+								<p class="card-description">{article.data.description}</p>
+								<div class="card-meta">
+									<span>By {article.data.author}</span>
+									<span class="dot">·</span>
+									<time datetime={article.data.publishDate.toISOString()}>
+										{formatDate(article.data.publishDate)}
+									</time>
+								</div>
+							</a>
+						);
+					})}
+				</div>
+			</section>
+		)}
 	</main>
 </Layout>
 
 <style>
-	.home-page {
-		padding-block: 4rem;
-	}
-	.site-title {
-		text-align: center;
-		margin-bottom: 0.5rem;
-	}
-	.site-tagline {
-		text-align: center;
-		color: var(--color-text-muted);
-		font-size: 1.15rem;
-		margin-bottom: 3rem;
+	.home {
+		padding-block: 2.5rem 4rem;
 	}
 
-	.browse-section {
-		margin-bottom: 3rem;
+	/* === HERO === */
+	.hero {
+		margin-bottom: 4rem;
 	}
-	.browse-title {
-		margin-bottom: 1rem;
-		font-size: 1.1rem;
-		font-weight: 600;
-		color: var(--color-text-muted);
+	.hero-card {
+		display: block;
+		padding: 3rem 2.5rem;
+		background: var(--color-surface);
+		border: 1px solid var(--color-border);
+		border-radius: 1.25rem;
+		text-decoration: none;
+		color: inherit;
+		position: relative;
+		overflow: hidden;
+		transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
 	}
-	.category-chips {
+	.hero-card::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 4px;
+		background: var(--gradient-brand);
+	}
+	.hero-card:hover {
+		border-color: var(--color-accent);
+		transform: translateY(-2px);
+		box-shadow: 0 12px 32px rgba(59, 130, 246, 0.12);
+	}
+
+	.hero-content {
+		max-width: 780px;
+	}
+
+	.hero-tags {
 		display: flex;
 		flex-wrap: wrap;
 		gap: 0.5rem;
+		align-items: center;
+		margin-bottom: 1.25rem;
 	}
-	.chip {
-		display: inline-block;
-		padding: 0.5rem 1rem;
-		background: var(--color-surface);
-		border: 1px solid var(--color-border);
-		border-radius: 2rem;
-		color: var(--color-text);
-		text-decoration: none;
-		font-size: 0.85rem;
-		font-weight: 500;
-		text-transform: capitalize;
-		transition: all 0.15s;
-	}
-	.chip:hover {
-		border-color: var(--color-accent);
+	.hero-category {
+		font-size: 0.75rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
 		color: var(--color-accent);
 	}
+	.hero-featured-badge {
+		display: inline-block;
+		padding: 0.2rem 0.6rem;
+		font-size: 0.7rem;
+		font-weight: 700;
+		letter-spacing: 0.05em;
+		background: var(--gradient-brand);
+		color: white;
+		border-radius: 2rem;
+	}
 
-	.articles-heading {
+	.hero-title {
+		font-size: clamp(1.75rem, 4.5vw, 3rem);
+		line-height: 1.1;
+		letter-spacing: -0.02em;
+		margin-bottom: 1rem;
+		color: var(--color-text);
+		font-weight: 800;
+	}
+
+	.hero-description {
+		font-size: clamp(1rem, 1.5vw, 1.2rem);
+		line-height: 1.6;
+		color: var(--color-text-muted);
 		margin-bottom: 1.5rem;
 	}
-	.article-list {
-		list-style: none;
-		display: grid;
-		gap: 1rem;
+
+	.hero-meta {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		align-items: center;
+		font-size: 0.9rem;
+		color: var(--color-text-subtle);
+		margin-bottom: 1.75rem;
 	}
+	.hero-meta strong {
+		color: var(--color-text);
+		font-weight: 600;
+	}
+	.hero-meta .sep {
+		opacity: 0.5;
+	}
+
+	.hero-cta {
+		display: inline-block;
+		color: var(--color-accent);
+		font-weight: 600;
+		font-size: 1rem;
+		transition: transform 0.15s;
+	}
+	.hero-card:hover .hero-cta {
+		transform: translateX(4px);
+	}
+
+	/* === LATEST === */
+	.latest {
+		margin-bottom: 2rem;
+	}
+	.latest-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: baseline;
+		margin-bottom: 1.5rem;
+		padding-bottom: 0.75rem;
+		border-bottom: 1px solid var(--color-border);
+	}
+	.latest-header h2 {
+		font-size: 1.5rem;
+		font-weight: 700;
+		margin: 0;
+		color: var(--color-text);
+	}
+	.latest-count {
+		font-size: 0.85rem;
+		color: var(--color-text-subtle);
+	}
+
+	.article-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+		gap: 1.25rem;
+	}
+
 	.article-card {
+		display: flex;
+		flex-direction: column;
 		padding: 1.5rem;
 		background: var(--color-surface);
 		border: 1px solid var(--color-border);
-		border-radius: 0.75rem;
+		border-radius: 0.85rem;
+		text-decoration: none;
+		color: inherit;
 		transition: border-color 0.15s, transform 0.15s;
 	}
 	.article-card:hover {
 		border-color: var(--color-accent);
-		transform: translateY(-1px);
+		transform: translateY(-2px);
 	}
-	.category-link {
-		display: inline-block;
-		font-size: 0.75rem;
+
+	.card-category {
+		font-size: 0.7rem;
 		font-weight: 700;
-		letter-spacing: 0.05em;
+		letter-spacing: 0.08em;
 		text-transform: uppercase;
 		color: var(--color-accent);
-		margin-bottom: 0.5rem;
-		text-decoration: none;
+		margin-bottom: 0.7rem;
 	}
-	.category-link:hover {
-		color: var(--color-accent-warm);
-	}
-	.article-title {
-		margin-bottom: 0.5rem;
-	}
-	.article-title a {
+
+	.card-title {
+		font-size: 1.15rem;
+		line-height: 1.35;
+		margin-bottom: 0.6rem;
 		color: var(--color-text);
-		text-decoration: none;
+		font-weight: 700;
+		display: -webkit-box;
+		-webkit-line-clamp: 3;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
 	}
-	.article-title a:hover {
-		color: var(--color-accent);
-	}
-	.article-desc {
+
+	.card-description {
+		font-size: 0.9rem;
 		color: var(--color-text-muted);
-		margin-bottom: 0.75rem;
+		line-height: 1.5;
+		margin-bottom: 1rem;
+		flex: 1;
+		display: -webkit-box;
+		-webkit-line-clamp: 3;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
 	}
-	.article-meta {
-		font-size: 0.85rem;
+
+	.card-meta {
+		font-size: 0.8rem;
 		color: var(--color-text-subtle);
+		margin-top: auto;
+	}
+	.card-meta .dot {
+		margin-inline: 0.35rem;
+		opacity: 0.5;
+	}
+
+	/* === EMPTY STATE === */
+	.empty-state {
+		padding-block: 4rem 2rem;
+	}
+	.empty-card {
+		text-align: center;
+		padding: 3rem 2rem;
+		background: var(--color-surface);
+		border: 1px dashed var(--color-border);
+		border-radius: 1rem;
+	}
+	.empty-icon {
+		width: 64px;
+		height: 64px;
+		margin: 0 auto 1.25rem auto;
+	}
+	.empty-card h1 {
+		font-size: 1.5rem;
+		margin-bottom: 0.5rem;
+	}
+	.empty-card p {
+		color: var(--color-text-muted);
+	}
+
+	@media (max-width: 640px) {
+		.hero-card {
+			padding: 2rem 1.5rem;
+		}
+		.latest-header {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 0.25rem;
+		}
 	}
 </style>
