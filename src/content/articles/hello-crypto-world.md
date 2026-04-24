@@ -1,5 +1,5 @@
 ---
-title: '"Hello Crypto World — Metronome News is LIVE! (edited)"'
+title: Hello Crypto World — Metronome News is live
 description: Metronome News launches as a modern crypto and Web3 publication.
   Here's what to expect from our coverage in the coming months.
 publishDate: 2026-04-19
