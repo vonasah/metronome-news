@@ -1,4 +1,6 @@
 ---
+import Search from './Search.astro';
+
 const CATEGORIES = [
 	{ slug: 'bitcoin', label: 'Bitcoin' },
 	{ slug: 'ethereum', label: 'Ethereum' },
@@ -17,7 +19,7 @@ const currentPath = Astro.url.pathname;
 	<div class="header-inner container">
 		<a href="/" class="logo" aria-label="Metronome News — home">
 			<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" class="logo-icon">
-	<defs>
+				<defs>
 					<linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
 						<stop offset="0%" stop-color="#3b82f6">
 							<animate attributeName="stop-color"
@@ -69,15 +71,19 @@ const currentPath = Astro.url.pathname;
 			</ul>
 		</nav>
 
-		<button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-			<svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-				<circle cx="12" cy="12" r="4"/>
-				<path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
-			</svg>
-			<svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-				<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-			</svg>
-		</button>
+		<div class="header-actions">
+			<Search />
+
+			<button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+				<svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<circle cx="12" cy="12" r="4"/>
+					<path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+				</svg>
+				<svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+				</svg>
+			</button>
+		</div>
 	</div>
 </header>
 
@@ -110,7 +116,7 @@ const currentPath = Astro.url.pathname;
 		height: 36px;
 	}
 
-/* Logo: stop SVG gradient animation for users with reduced-motion preference */
+	/* Logo: stop SVG gradient animation for users with reduced-motion preference */
 	@media (prefers-reduced-motion: reduce) {
 		.logo-icon linearGradient animate {
 			animation-play-state: paused;
@@ -169,6 +175,13 @@ const currentPath = Astro.url.pathname;
 		background: var(--color-surface-alt);
 	}
 
+	.header-actions {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		flex-shrink: 0;
+	}
+
 	.theme-toggle {
 		width: 36px;
 		height: 36px;
@@ -225,10 +238,11 @@ const currentPath = Astro.url.pathname;
 			gap: 0.75rem;
 		}
 		.menu-toggle { display: flex; }
-		.theme-toggle { margin-left: 0; }
+		.header-actions { margin-left: 0; }
 		.main-nav {
 			flex-basis: 100%;
 			display: none;
+			order: 10;
 		}
 		.main-nav.open {
 			display: block;
