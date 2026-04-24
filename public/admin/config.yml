@@ -1,9 +1,13 @@
+# Set to true for local development (requires `npm run cms`).
+# Set to false for production (uses GitHub OAuth).
 local_backend: true
 
 backend:
   name: github
   repo: vonasah/metronome-news
   branch: main
+  base_url: https://metronome-oauth.vonasah.deno.net
+  auth_endpoint: auth
 
 media_folder: "public/uploads"
 public_folder: "/uploads"
