@@ -1,0 +1,178 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const lastUpdated = "April 2026";
+---
+
+<Layout
+	title="Privacy Policy — Metronome News"
+	description="Privacy policy for Metronome News. What we collect (almost nothing), how we use it, and your rights."
+>
+	<main class="static-page container">
+		<header class="page-header">
+			<div class="page-badge">Privacy</div>
+			<h1>Privacy Policy</h1>
+			<p class="page-tagline">What we collect, what we don't, and why it matters.</p>
+			<p class="last-updated">Last updated: <time>{lastUpdated}</time></p>
+		</header>
+
+		<div class="prose">
+			<p class="lead">
+				Metronome News is designed to respect your privacy by default. This page explains
+				exactly what data we process and what we don't. Short version: we collect almost
+				nothing.
+			</p>
+
+			<h2>What we don't collect</h2>
+			<ul>
+				<li>We don't have user accounts — there's no registration, email, or password required to read.</li>
+				<li>We don't use third-party analytics tools (no Google Analytics, no Facebook Pixel).</li>
+				<li>We don't set tracking cookies.</li>
+				<li>We don't sell or share any data — we have none to sell.</li>
+			</ul>
+
+			<h2>What your browser stores locally</h2>
+			<p>
+				For convenience, the site saves a few preferences in your browser's
+				<code>localStorage</code>. This data never leaves your device and we never see it:
+			</p>
+			<ul>
+				<li>Theme preference (light or dark mode).</li>
+			</ul>
+			<p>You can clear this any time from your browser's settings.</p>
+
+			<h2>Third-party content</h2>
+			<p>
+				When you click a link to an external site (e.g. a source cited in an article),
+				you leave Metronome News and enter that site's domain. The policies of that
+				site apply from that point. We don't control what happens there.
+			</p>
+			<p>
+				We use a small number of third-party resources to make the site work:
+			</p>
+			<ul>
+				<li>
+					<strong>Fonts</strong> — the Inter font is served from our own domain
+					(not Google Fonts), so there's no tracking connection to Google.
+				</li>
+				<li>
+					<strong>GitHub Pages</strong> — our hosting provider. Standard web hosting
+					logs may be kept by GitHub. See
+					<a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">GitHub's privacy statement</a>.
+				</li>
+			</ul>
+
+			<h2>Server logs</h2>
+			<p>
+				Like most web hosts, GitHub Pages keeps basic logs (IP address, request time,
+				page requested). These are not accessible to us and are used by GitHub for
+				operational purposes such as preventing abuse. They are not used for advertising.
+			</p>
+
+			<h2>Advertising</h2>
+			<p>
+				Metronome News currently does <strong>not</strong> run ads. If this changes
+				in the future (e.g. we enable Google AdSense), this page will be updated
+				with full disclosure at least 30 days before ads go live.
+			</p>
+
+			<h2>Changes to this policy</h2>
+			<p>
+				If we make significant changes, we'll update the "Last updated" date at the
+				top of this page and note major changes in a changelog.
+			</p>
+
+			<h2>Contact</h2>
+			<p>
+				Privacy questions? Email <a href="mailto:contact@metronome.news">contact@metronome.news</a>.
+				Subject line starting with "Privacy:" gets a faster reply.
+			</p>
+		</div>
+	</main>
+</Layout>
+
+<style>
+	.static-page {
+		max-width: 780px;
+		padding-block: 2.5rem 5rem;
+	}
+
+	.page-header {
+		margin-bottom: 3rem;
+		padding-bottom: 1.5rem;
+		border-bottom: 1px solid var(--color-border);
+	}
+	.page-badge {
+		display: inline-block;
+		font-size: 0.75rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--color-accent);
+		margin-bottom: 0.75rem;
+	}
+	.page-header h1 {
+		font-size: clamp(2rem, 4vw, 2.75rem);
+		letter-spacing: -0.02em;
+		margin-bottom: 0.5rem;
+		font-weight: 800;
+	}
+	.page-tagline {
+		color: var(--color-text-muted);
+		font-size: 1.1rem;
+		line-height: 1.5;
+		margin-bottom: 0.5rem;
+	}
+	.last-updated {
+		font-size: 0.85rem;
+		color: var(--color-text-subtle);
+		margin: 0;
+	}
+
+	.prose {
+		font-size: 1.05rem;
+		line-height: 1.75;
+		color: var(--color-text);
+	}
+	.prose .lead {
+		font-size: 1.15rem;
+		line-height: 1.6;
+		color: var(--color-text);
+		margin-bottom: 2rem;
+	}
+	.prose h2 {
+		font-size: 1.55rem;
+		font-weight: 700;
+		margin-top: 2.5rem;
+		margin-bottom: 1rem;
+		color: var(--color-text);
+	}
+	.prose p {
+		margin-bottom: 1.25rem;
+	}
+	.prose ul {
+		margin: 1rem 0 1.5rem 1.5rem;
+	}
+	.prose li {
+		margin-bottom: 0.5rem;
+	}
+	.prose a {
+		color: var(--color-accent);
+		text-decoration: underline;
+		text-underline-offset: 3px;
+	}
+	.prose a:hover {
+		color: var(--color-accent-warm);
+	}
+	.prose strong {
+		font-weight: 700;
+		color: var(--color-text);
+	}
+	.prose code {
+		background: var(--color-surface-alt);
+		padding: 0.15rem 0.4rem;
+		border-radius: 4px;
+		font-family: 'SF Mono', Monaco, monospace;
+		font-size: 0.9em;
+	}
+</style>

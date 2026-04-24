@@ -1,0 +1,155 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+	title="About — Metronome News"
+	description="About Metronome News — crypto and Web3 journalism with a steady beat. Independent, ad-free, reader-funded."
+>
+	<main class="static-page container">
+		<header class="page-header">
+			<div class="page-badge">About</div>
+			<h1>Metronome News</h1>
+			<p class="page-tagline">Crypto & Web3 journalism with a steady beat.</p>
+		</header>
+
+		<div class="prose">
+			<p class="lead">
+				Metronome News is an independent publication covering cryptocurrency, blockchain,
+				and the broader Web3 ecosystem. We aim to cut through the noise with clear,
+				thoughtful coverage that respects your time.
+			</p>
+
+			<h2>Why Metronome?</h2>
+			<p>
+				The crypto news cycle is deafening. Every hour brings new tokens, new protocols,
+				new narratives. Most of it is noise — paid promotion, copypasted press releases,
+				hot takes without substance.
+			</p>
+			<p>
+				We think crypto deserves better. A metronome keeps rhythm steady regardless of
+				the tempo around it. That's the posture we want to bring to crypto coverage:
+				measured, consistent, clear.
+			</p>
+
+			<h2>What we cover</h2>
+			<p>We focus on eight core areas:</p>
+			<ul>
+				<li><strong>Bitcoin</strong> — ETF flows, on-chain data, macro narratives</li>
+				<li><strong>Ethereum</strong> — upgrades, L2 ecosystem, DeFi on mainnet</li>
+				<li><strong>Altcoins</strong> — everything beyond BTC and ETH that matters</li>
+				<li><strong>DeFi</strong> — protocols, yield, risks, and the innovation cycle</li>
+				<li><strong>NFTs</strong> — past the hype, into real use cases</li>
+				<li><strong>Regulation</strong> — what lawmakers do and how it affects you</li>
+				<li><strong>Market Analysis</strong> — data over opinion</li>
+				<li><strong>Web3</strong> — the broader decentralized stack</li>
+			</ul>
+
+			<h2>Our principles</h2>
+			<p>Three rules we try to keep:</p>
+			<ol>
+				<li><strong>No shilling.</strong> We don't take payment to cover projects.</li>
+				<li><strong>Sources over speculation.</strong> Every claim links to its origin.</li>
+				<li><strong>Respect your time.</strong> Short when possible, long only when needed.</li>
+			</ol>
+
+			<h2>Who's behind this</h2>
+			<p>
+				Metronome News is a one-person operation (for now). I'm <strong>raptor</strong>,
+				an independent writer covering crypto and Web3. If you'd like to collaborate,
+				suggest a story, or just say hi —
+				<a href="/contact">get in touch</a>.
+			</p>
+
+			<h2>How to support</h2>
+			<p>
+				The best way to support Metronome News is to read the articles, share the ones
+				you find useful, and tell one person who also reads too much crypto news.
+				We don't run ads on readers (currently) and don't take sponsored content.
+			</p>
+
+			<h2>Technology</h2>
+			<p>
+				This site is built with <a href="https://astro.build" target="_blank" rel="noopener">Astro</a>,
+				hosted on GitHub Pages, and written in Markdown. No trackers, no ads, no
+				third-party scripts following you around. The source code is public and open.
+			</p>
+		</div>
+	</main>
+</Layout>
+
+<style>
+	.static-page {
+		max-width: 780px;
+		padding-block: 2.5rem 5rem;
+	}
+
+	.page-header {
+		margin-bottom: 3rem;
+		padding-bottom: 1.5rem;
+		border-bottom: 1px solid var(--color-border);
+	}
+	.page-badge {
+		display: inline-block;
+		font-size: 0.75rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--color-accent);
+		margin-bottom: 0.75rem;
+	}
+	.page-header h1 {
+		font-size: clamp(2rem, 4vw, 2.75rem);
+		letter-spacing: -0.02em;
+		margin-bottom: 0.5rem;
+		font-weight: 800;
+	}
+	.page-tagline {
+		color: var(--color-text-muted);
+		font-size: 1.1rem;
+		line-height: 1.5;
+	}
+
+	.prose {
+		font-size: 1.05rem;
+		line-height: 1.75;
+		color: var(--color-text);
+	}
+	.prose .lead {
+		font-size: 1.2rem;
+		line-height: 1.6;
+		color: var(--color-text);
+		margin-bottom: 2rem;
+		font-weight: 500;
+	}
+	.prose h2 {
+		font-size: 1.55rem;
+		font-weight: 700;
+		margin-top: 2.5rem;
+		margin-bottom: 1rem;
+		color: var(--color-text);
+		letter-spacing: -0.01em;
+	}
+	.prose p {
+		margin-bottom: 1.25rem;
+	}
+	.prose ul,
+	.prose ol {
+		margin: 1rem 0 1.5rem 1.5rem;
+	}
+	.prose li {
+		margin-bottom: 0.5rem;
+	}
+	.prose a {
+		color: var(--color-accent);
+		text-decoration: underline;
+		text-underline-offset: 3px;
+	}
+	.prose a:hover {
+		color: var(--color-accent-warm);
+	}
+	.prose strong {
+		font-weight: 700;
+		color: var(--color-text);
+	}
+</style>

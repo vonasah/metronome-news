@@ -1,0 +1,183 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const lastUpdated = "April 2026";
+---
+
+<Layout
+	title="Terms of Use — Metronome News"
+	description="Terms of use for Metronome News. Content disclaimer, acceptable use, no warranty."
+>
+	<main class="static-page container">
+		<header class="page-header">
+			<div class="page-badge">Terms</div>
+			<h1>Terms of Use</h1>
+			<p class="page-tagline">The legal stuff. Short and readable.</p>
+			<p class="last-updated">Last updated: <time>{lastUpdated}</time></p>
+		</header>
+
+		<div class="prose">
+			<p class="lead">
+				By using Metronome News, you agree to these terms. They exist to make expectations
+				clear on both sides — what you can expect from us, and what we expect from visitors.
+			</p>
+
+			<h2>Content disclaimer</h2>
+			<p>
+				Articles on Metronome News are editorial content, not financial, legal, or investment
+				advice. Cryptocurrency is risky. Do your own research. Consider consulting
+				a licensed financial advisor before making decisions based on anything you read here
+				or anywhere else on the internet.
+			</p>
+			<p>
+				We work to be accurate but don't guarantee that any specific article is current,
+				correct, or complete. If you find an error, please
+				<a href="/contact">let us know</a>.
+			</p>
+
+			<h2>Intellectual property</h2>
+			<p>
+				All original articles, design, and code on Metronome News are copyrighted to
+				the operator (raptor) unless stated otherwise. You may:
+			</p>
+			<ul>
+				<li>Read, share, and quote short excerpts for commentary or review.</li>
+				<li>Link to articles freely.</li>
+			</ul>
+			<p>You may not:</p>
+			<ul>
+				<li>Republish full articles without written permission.</li>
+				<li>Use articles to train AI models without written permission.</li>
+				<li>Pass off our content as your own.</li>
+			</ul>
+
+			<h2>Third-party content</h2>
+			<p>
+				Articles may quote, cite, or embed content from other sources (tweets, images,
+				videos, quoted text). Such content remains the property of its original
+				creators. If you believe content on Metronome News infringes your rights, please
+				contact us — we respond to legitimate takedown requests promptly.
+			</p>
+
+			<h2>No warranty</h2>
+			<p>
+				Metronome News is provided "as is" without warranty of any kind. We don't guarantee:
+			</p>
+			<ul>
+				<li>The accuracy, completeness, or timeliness of any article.</li>
+				<li>Uptime or continuous availability.</li>
+				<li>That the site is free from bugs, errors, or security issues.</li>
+			</ul>
+			<p>
+				News content reflects the views of its author, not necessarily any advertisers,
+				partners, or affiliates (currently we have none).
+			</p>
+
+			<h2>Acceptable use</h2>
+			<p>Please don't:</p>
+			<ul>
+				<li>Scrape the site in ways that overload our servers.</li>
+				<li>Attempt to hack, disrupt, or abuse the service.</li>
+				<li>Use the site to commit fraud or illegal activity.</li>
+			</ul>
+
+			<h2>Changes to these terms</h2>
+			<p>
+				We may update these terms from time to time. Continued use of the site after changes
+				constitutes acceptance of the updated terms. The "Last updated" date at the top
+				of this page reflects the most recent revision.
+			</p>
+
+			<h2>Jurisdiction</h2>
+			<p>
+				These terms don't specify a jurisdiction — Metronome News is a one-person publication
+				and any disputes are handled informally by email. If that's unacceptable for you,
+				we apologize in advance, and suggest not using the site.
+			</p>
+
+			<h2>Contact</h2>
+			<p>
+				Questions about these terms? <a href="mailto:contact@metronome.news">contact@metronome.news</a>.
+			</p>
+		</div>
+	</main>
+</Layout>
+
+<style>
+	.static-page {
+		max-width: 780px;
+		padding-block: 2.5rem 5rem;
+	}
+
+	.page-header {
+		margin-bottom: 3rem;
+		padding-bottom: 1.5rem;
+		border-bottom: 1px solid var(--color-border);
+	}
+	.page-badge {
+		display: inline-block;
+		font-size: 0.75rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--color-accent);
+		margin-bottom: 0.75rem;
+	}
+	.page-header h1 {
+		font-size: clamp(2rem, 4vw, 2.75rem);
+		letter-spacing: -0.02em;
+		margin-bottom: 0.5rem;
+		font-weight: 800;
+	}
+	.page-tagline {
+		color: var(--color-text-muted);
+		font-size: 1.1rem;
+		line-height: 1.5;
+		margin-bottom: 0.5rem;
+	}
+	.last-updated {
+		font-size: 0.85rem;
+		color: var(--color-text-subtle);
+		margin: 0;
+	}
+
+	.prose {
+		font-size: 1.05rem;
+		line-height: 1.75;
+		color: var(--color-text);
+	}
+	.prose .lead {
+		font-size: 1.15rem;
+		line-height: 1.6;
+		color: var(--color-text);
+		margin-bottom: 2rem;
+	}
+	.prose h2 {
+		font-size: 1.55rem;
+		font-weight: 700;
+		margin-top: 2.5rem;
+		margin-bottom: 1rem;
+		color: var(--color-text);
+	}
+	.prose p {
+		margin-bottom: 1.25rem;
+	}
+	.prose ul {
+		margin: 1rem 0 1.5rem 1.5rem;
+	}
+	.prose li {
+		margin-bottom: 0.5rem;
+	}
+	.prose a {
+		color: var(--color-accent);
+		text-decoration: underline;
+		text-underline-offset: 3px;
+	}
+	.prose a:hover {
+		color: var(--color-accent-warm);
+	}
+	.prose strong {
+		font-weight: 700;
+		color: var(--color-text);
+	}
+</style>

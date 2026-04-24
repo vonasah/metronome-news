@@ -1,0 +1,211 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+	title="Contact — Metronome News"
+	description="Get in touch with Metronome News — feedback, story tips, corrections, or just to say hi."
+>
+	<main class="static-page container">
+		<header class="page-header">
+			<div class="page-badge">Contact</div>
+			<h1>Get in touch</h1>
+			<p class="page-tagline">Feedback, story tips, corrections — or just say hi.</p>
+		</header>
+
+		<div class="prose">
+			<p class="lead">
+				Metronome News is a small, independent publication. I read every message personally
+				and try to reply to anything that needs a reply within a few days.
+			</p>
+
+			<div class="contact-cards">
+				<a href="mailto:contact@metronome.news" class="contact-card">
+					<div class="contact-card-icon">✉️</div>
+					<div class="contact-card-content">
+						<h3>Email</h3>
+						<p>The best way to reach me.</p>
+						<span class="contact-card-value">contact@metronome.news</span>
+					</div>
+				</a>
+
+				<div class="contact-card contact-card-disabled">
+					<div class="contact-card-icon">𝕏</div>
+					<div class="contact-card-content">
+						<h3>Twitter / X</h3>
+						<p>Coming soon — working on it.</p>
+						<span class="contact-card-value">@metronome_news</span>
+					</div>
+				</div>
+
+				<div class="contact-card contact-card-disabled">
+					<div class="contact-card-icon">📣</div>
+					<div class="contact-card-content">
+						<h3>Telegram</h3>
+						<p>Coming soon — working on it.</p>
+						<span class="contact-card-value">t.me/metronome_news</span>
+					</div>
+				</div>
+			</div>
+
+			<h2>What to include in your message</h2>
+			<p>It helps if you can tell me upfront what kind of message this is:</p>
+			<ul>
+				<li><strong>Story tip</strong> — a lead, a tip, or a source for something we should cover.</li>
+				<li><strong>Correction</strong> — an error in an article. Please include the link and a description.</li>
+				<li><strong>Feedback</strong> — thoughts on coverage, the site, anything.</li>
+				<li><strong>Collaboration</strong> — you want to write or contribute in some way.</li>
+				<li><strong>Press / PR</strong> — please note, we don't publish press releases or sponsored content.</li>
+			</ul>
+
+			<h2>What we don't do</h2>
+			<p>A few things that aren't a fit for Metronome News:</p>
+			<ul>
+				<li>Sponsored articles or paid promotions for specific tokens / projects.</li>
+				<li>Guest posts from SEO agencies.</li>
+				<li>Link exchanges.</li>
+				<li>Financial advice. We cover crypto, we don't tell anyone what to buy.</li>
+			</ul>
+
+			<p class="back-note">
+				Not sure where to start? <a href="/about">Read the About page</a> to get
+				a feel for what we're building.
+			</p>
+		</div>
+	</main>
+</Layout>
+
+<style>
+	.static-page {
+		max-width: 780px;
+		padding-block: 2.5rem 5rem;
+	}
+
+	.page-header {
+		margin-bottom: 3rem;
+		padding-bottom: 1.5rem;
+		border-bottom: 1px solid var(--color-border);
+	}
+	.page-badge {
+		display: inline-block;
+		font-size: 0.75rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--color-accent);
+		margin-bottom: 0.75rem;
+	}
+	.page-header h1 {
+		font-size: clamp(2rem, 4vw, 2.75rem);
+		letter-spacing: -0.02em;
+		margin-bottom: 0.5rem;
+		font-weight: 800;
+	}
+	.page-tagline {
+		color: var(--color-text-muted);
+		font-size: 1.1rem;
+		line-height: 1.5;
+	}
+
+	.prose {
+		font-size: 1.05rem;
+		line-height: 1.75;
+		color: var(--color-text);
+	}
+	.prose .lead {
+		font-size: 1.15rem;
+		line-height: 1.6;
+		color: var(--color-text);
+		margin-bottom: 2rem;
+	}
+	.prose h2 {
+		font-size: 1.55rem;
+		font-weight: 700;
+		margin-top: 2.5rem;
+		margin-bottom: 1rem;
+		color: var(--color-text);
+	}
+	.prose p {
+		margin-bottom: 1.25rem;
+	}
+	.prose ul, .prose ol {
+		margin: 1rem 0 1.5rem 1.5rem;
+	}
+	.prose li {
+		margin-bottom: 0.5rem;
+	}
+	.prose a {
+		color: var(--color-accent);
+		text-decoration: underline;
+		text-underline-offset: 3px;
+	}
+	.prose a:hover {
+		color: var(--color-accent-warm);
+	}
+	.prose strong {
+		font-weight: 700;
+		color: var(--color-text);
+	}
+	.prose .back-note {
+		margin-top: 2.5rem;
+		padding-top: 1.5rem;
+		border-top: 1px solid var(--color-border);
+		color: var(--color-text-muted);
+		font-size: 0.95rem;
+	}
+
+	.contact-cards {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+		gap: 1rem;
+		margin: 2rem 0 3rem 0;
+	}
+	.contact-card {
+		display: flex;
+		gap: 1rem;
+		padding: 1.25rem;
+		background: var(--color-surface);
+		border: 1px solid var(--color-border);
+		border-radius: 0.85rem;
+		text-decoration: none;
+		color: inherit;
+		transition: border-color 0.15s, transform 0.15s;
+	}
+	.contact-card:hover {
+		border-color: var(--color-accent);
+		transform: translateY(-2px);
+	}
+	.contact-card-disabled {
+		opacity: 0.55;
+		cursor: default;
+	}
+	.contact-card-disabled:hover {
+		transform: none;
+		border-color: var(--color-border);
+	}
+	.contact-card-icon {
+		font-size: 1.75rem;
+		line-height: 1;
+		flex-shrink: 0;
+	}
+	.contact-card-content h3 {
+		font-size: 1rem;
+		font-weight: 700;
+		margin-bottom: 0.25rem;
+		color: var(--color-text);
+	}
+	.contact-card-content p {
+		font-size: 0.85rem;
+		color: var(--color-text-muted);
+		margin-bottom: 0.4rem;
+	}
+	.contact-card-value {
+		font-size: 0.85rem;
+		color: var(--color-accent);
+		font-weight: 500;
+		font-family: 'SF Mono', Monaco, monospace;
+	}
+	.contact-card-disabled .contact-card-value {
+		color: var(--color-text-subtle);
+	}
+</style>
