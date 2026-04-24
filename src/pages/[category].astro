@@ -257,4 +257,49 @@ function formatDate(date) {
 	.empty-state .back-link:hover {
 		text-decoration: underline;
 	}
+	/* Mobile: compact cards */
+	@media (max-width: 640px) {
+		.category-page {
+			padding-block: 1.5rem 3rem;
+		}
+		.category-header {
+			margin-bottom: 2rem;
+		}
+		.article-grid {
+			grid-template-columns: 1fr;
+			gap: 0.75rem;
+		}
+		.article-card {
+			flex-direction: row;
+			padding: 0;
+			overflow: hidden;
+			min-height: 100px;
+		}
+		.card-image {
+			flex-shrink: 0;
+			width: 120px;
+			aspect-ratio: auto;
+			height: auto;
+		}
+		.card-body {
+			padding: 0.85rem 1rem;
+			gap: 0.3rem;
+			flex: 1;
+		}
+		.card-category {
+			font-size: 0.65rem;
+			margin-bottom: 0.3rem;
+		}
+		.card-title {
+			font-size: 0.95rem;
+			-webkit-line-clamp: 2;
+			margin-bottom: 0.3rem;
+		}
+		.card-description {
+			display: none;
+		}
+		.card-meta {
+			font-size: 0.7rem;
+		}
+	}
 </style>

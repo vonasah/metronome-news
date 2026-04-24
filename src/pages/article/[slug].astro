@@ -4,6 +4,7 @@ import { getCollection, render } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import ShareButtons from '../../components/ShareButtons.astro';
 import CopyAttribution from '../../components/CopyAttribution.astro';
+import RelatedArticles from '../../components/RelatedArticles.astro';
 
 export async function getStaticPaths() {
 	const articles = await getCollection('articles', ({ data }) => !data.draft);
@@ -107,6 +108,10 @@ const articleUrl = new URL(Astro.url.pathname, Astro.site || 'https://metronome.
 					/>
 				</div>
 			</div>
+		</div>
+
+	<div class="container">
+			<RelatedArticles currentId={article.id} category={article.data.category} />
 		</div>
 
 		<footer class="article-footer container">

@@ -1,6 +1,7 @@
 ---
 title: My first article through Decap CMS
-description: Testing the CMS workflow — this article was created entirely through the web interface.
+description: Testing the CMS workflow — this article was created entirely
+  through the web interface.
 publishDate: 2026-04-20
 author: raptor
 category: ethereum
