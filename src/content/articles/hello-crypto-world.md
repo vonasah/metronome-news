@@ -9,7 +9,7 @@ tags:
   - metronome
   - launch
   - web3
-image: ""
+image: /uploads/frame-15.png
 featured: true
 draft: false
 ---
