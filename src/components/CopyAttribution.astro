@@ -1,0 +1,38 @@
+---
+interface Props {
+	siteName?: string;
+}
+
+const { siteName = 'Metronome News' } = Astro.props;
+---
+
+<script is:inline data-site-name={siteName}>
+	(function() {
+		var SITE_NAME = document.currentScript.getAttribute('data-site-name') || 'Metronome News';
+		var MIN_LENGTH = 30; // skip attribution for very short selections
+
+		document.addEventListener('copy', function(event) {
+			var selection = window.getSelection();
+			if (!selection) return;
+
+			var selectedText = selection.toString().trim();
+			if (!selectedText || selectedText.length < MIN_LENGTH) return;
+
+			// Only add attribution if selection is inside an article
+			var range = selection.getRangeAt(0);
+			var container = range.commonAncestorContainer;
+			var node = container.nodeType === 3 ? container.parentNode : container;
+			var insideArticle = node && node.closest && node.closest('.article-body');
+			if (!insideArticle) return;
+
+			var pageUrl = window.location.origin + window.location.pathname;
+			var attribution = '\n\nRead more: ' + pageUrl + '\n\u00A9 ' + SITE_NAME;
+			var fullText = selectedText + attribution;
+
+			if (event.clipboardData) {
+				event.clipboardData.setData('text/plain', fullText);
+				event.preventDefault();
+			}
+		});
+	})();
+</script>

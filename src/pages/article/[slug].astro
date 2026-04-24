@@ -2,6 +2,8 @@
 import Layout from '../../layouts/Layout.astro';
 import { getCollection, render } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
+import ShareButtons from '../../components/ShareButtons.astro';
+import CopyAttribution from '../../components/CopyAttribution.astro';
 
 export async function getStaticPaths() {
 	const articles = await getCollection('articles', ({ data }) => !data.draft);
@@ -35,8 +37,10 @@ const categoryTitle = article.data.category
 const categoryHref = "/" + article.data.category;
 const backHref = categoryHref;
 const backLabel = "← Back to " + categoryTitle;
----
 
+const articleUrl = new URL(Astro.url.pathname, Astro.site || 'https://metronome.news').href;
+---
+<CopyAttribution />
 <Layout
 	title={article.data.title + " — Metronome News"}
 	description={article.data.description}
@@ -85,8 +89,24 @@ const backLabel = "← Back to " + categoryTitle;
 			)}
 		</header>
 
-		<div class="article-body container">
-			<Content />
+		<div class="article-layout container">
+			<aside class="article-sidebar">
+				<ShareButtons
+					title={article.data.title}
+					url={articleUrl}
+					description={article.data.description}
+				/>
+			</aside>
+			<div class="article-body">
+				<Content />
+				<div class="article-share-mobile">
+					<ShareButtons
+						title={article.data.title}
+						url={articleUrl}
+						description={article.data.description}
+					/>
+				</div>
+			</div>
 		</div>
 
 		<footer class="article-footer container">
@@ -101,6 +121,9 @@ const backLabel = "← Back to " + categoryTitle;
 	}
 	.article-page .container {
 		max-width: 780px;
+	}
+	.article-page .article-layout.container {
+		max-width: 960px;
 	}
 
 	.breadcrumbs {
@@ -208,10 +231,41 @@ const backLabel = "← Back to " + categoryTitle;
 		border-radius: 2rem;
 	}
 
+	/* Layout: sidebar with share buttons + article body */
+	.article-layout {
+		display: grid;
+		grid-template-columns: 140px 1fr;
+		gap: 2.5rem;
+		align-items: start;
+	}
+
+	.article-sidebar {
+		position: sticky;
+		top: 5rem;
+	}
+
+	.article-share-mobile {
+		display: none;
+	}
+
+	@media (max-width: 900px) {
+		.article-layout {
+			grid-template-columns: 1fr;
+			gap: 0;
+		}
+		.article-sidebar {
+			display: none;
+		}
+		.article-share-mobile {
+			display: block;
+		}
+	}
+
 	.article-body {
 		font-size: 1.075rem;
 		line-height: 1.75;
 		color: var(--color-text);
+		min-width: 0;
 	}
 	.article-body :global(h2) {
 		font-size: 1.75rem;
@@ -277,6 +331,8 @@ const backLabel = "← Back to " + categoryTitle;
 	.article-body :global(img) {
 		border-radius: 8px;
 		margin-block: 1.5rem;
+		max-width: 100%;
+		height: auto;
 	}
 	.article-body :global(hr) {
 		border: none;
