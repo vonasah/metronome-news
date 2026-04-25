@@ -101,6 +101,8 @@ const jsonLd = type === 'article' ? {
 
 		<!-- JSON-LD structured data -->
 		<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+		<!-- Cloudflare Web Analytics -->
+		<script is:inline defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "9c25933f9cf54e2cb833226d472eba62"}'></script>
 	</head>
 	<body>
 		<Header />
