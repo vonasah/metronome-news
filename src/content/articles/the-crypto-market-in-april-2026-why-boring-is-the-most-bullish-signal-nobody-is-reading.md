@@ -17,7 +17,7 @@ tags:
   - "2026"
 image: /uploads/conceptual.png
 featured: true
-draft: true
+draft: false
 ---
 If you check Bitcoin's price chart this week, you might shrug. It's been trading around $78,000 for days. No fireworks. No flash crashes. Yesterday it nudged up $316. The day before, it dropped $384. Compared to October 2025, when the asset hit a giddy all-time high of $126,198, this looks like the market has lost its plot.
 
