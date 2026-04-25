@@ -6,7 +6,7 @@ description: Bitcoin sits at $78,000 — far below October's all-time high of
   paradoxically, is the most important story in crypto right now.
 publishDate: 2026-04-25
 author: raptor
-category: bitcoin
+category: market-analysis
 tags:
   - bitcoin
   - ethereum
