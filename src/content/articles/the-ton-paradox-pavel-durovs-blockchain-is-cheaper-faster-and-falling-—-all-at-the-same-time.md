@@ -1,10 +1,9 @@
 ---
 title: "The TON Paradox: Pavel Durov's Blockchain Is Cheaper, Faster, and
   Falling — All at the Same Time"
-description: TON just slashed transaction fees sixfold. The network is now 10x
-  faster than last month. The token barely moved. With Telegram's billion users,
-  an ongoing French legal case, and a public alliance with Elon Musk — what's
-  actually going on with Pavel Durov's bet?
+description: TON slashed fees sixfold. The network is now 10x faster. The token
+  barely moved. With Telegram's billion users and Durov's French case — what's
+  really happening with Pavel Durov's blockchain bet?
 publishDate: 2026-04-25
 author: raptor
 category: altcoins
