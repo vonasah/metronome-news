@@ -1,9 +1,9 @@
 ---
 title: "The Trump Crypto Trade: How a Sitting President Is Rewriting Market
   Rules — And Who's Profiting"
-description: A $1.1 billion whale trade. $2 billion in retail losses on $TRUMP.
-  Foreign payments through World Liberty Financial. The most documented
-  financial entanglement of a sitting president in American history.
+description: A $1.1 billion whale trade. $2B in retail losses on $TRUMP. Foreign
+  money through WLFI. The most documented financial entanglement of a sitting
+  president in modern American history.
 publishDate: 2026-04-25
 author: raptor
 category: regulation
