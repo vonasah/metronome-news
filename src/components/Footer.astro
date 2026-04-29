@@ -1,333 +1,279 @@
 ---
-const CATEGORIES = [
-	{ slug: 'bitcoin', label: 'Bitcoin' },
-	{ slug: 'ethereum', label: 'Ethereum' },
-	{ slug: 'altcoins', label: 'Altcoins' },
-	{ slug: 'defi', label: 'DeFi' },
-	{ slug: 'nft', label: 'NFT' },
-	{ slug: 'regulation', label: 'Regulation' },
-	{ slug: 'market-analysis', label: 'Markets' },
-	{ slug: 'web3', label: 'Web3' },
-];
-
-// Social links. Set href to null for "Coming soon" tooltip.
-// When you create accounts, just replace null with the URL, e.g. 'https://twitter.com/metronomenews'
-const SOCIAL_LINKS = [
-	{
-    name: 'X',
-    href: 'https://twitter.com/metronomenews', // ← твой реальный URL
-    label: 'Follow on X (Twitter)',
-},
-	{
-		name: 'Telegram',
-		href: null, // TODO: add Telegram channel link when ready
-		label: 'Join our Telegram channel',
-	},
-	{
-		name: 'GitHub',
-		href: 'https://github.com/vonasah/metronome-news',
-		label: 'View source on GitHub',
-	},
-];
-
-const currentYear = new Date().getFullYear();
+// src/components/Footer.astro
+// Footer with X (Twitter) and CoinMarketCap social links
 ---
 
 <footer class="site-footer">
-	<div class="footer-inner container">
-		<div class="footer-top">
-			<!-- Brand -->
-			<div class="footer-brand">
-				<div class="footer-logo">
-					<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" class="footer-icon">
-						<defs>
-							<linearGradient id="footerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-								<stop offset="0%" stop-color="#3b82f6"/>
-								<stop offset="100%" stop-color="#f97316"/>
-							</linearGradient>
-						</defs>
-						<rect width="64" height="64" rx="12" fill="url(#footerGrad)"/>
-						<path d="M20 50 L44 50 L36 14 L28 14 Z" fill="none" stroke="white" stroke-width="3" stroke-linejoin="round"/>
-						<line x1="32" y1="50" x2="22" y2="22" stroke="white" stroke-width="3" stroke-linecap="round"/>
-						<circle cx="22" cy="22" r="3" fill="white"/>
-					</svg>
-					<div class="footer-logo-text">
-						<span class="footer-brand-name">Metronome</span>
-						<span class="footer-brand-sub">News</span>
-					</div>
-				</div>
-				<p class="footer-tagline">
-					Crypto &amp; Web3 journalism with a steady beat. Independent, ad-free, reader-funded.
-				</p>
+  <div class="footer-container">
+    <div class="footer-top">
+      <!-- Brand section -->
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-label="Metronome News">
+            <defs>
+              <linearGradient id="footerLogoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#3b82f6" />
+                <stop offset="100%" stop-color="#f97316" />
+              </linearGradient>
+            </defs>
+            <rect width="64" height="64" rx="12" fill="url(#footerLogoGrad)" />
+            <path
+              d="M20 50 L44 50 L36 14 L28 14 Z"
+              fill="none"
+              stroke="white"
+              stroke-width="3"
+              stroke-linejoin="round"
+            />
+            <line
+              x1="32"
+              y1="50"
+              x2="22"
+              y2="22"
+              stroke="white"
+              stroke-width="3"
+              stroke-linecap="round"
+            />
+            <circle cx="22" cy="22" r="3" fill="white" />
+          </svg>
+        </div>
+        <div class="footer-brand-text">
+          <div class="footer-brand-name">Metronome News</div>
+          <div class="footer-brand-tagline">Crypto journalism without the hype.</div>
+        </div>
+      </div>
 
-				<!-- Social links -->
-				<div class="footer-social">
-					<span class="footer-social-label">Follow us</span>
-					<div class="footer-social-icons">
-						{SOCIAL_LINKS.map((social) => {
-							const isActive = social.href !== null;
-							const tooltip = isActive ? social.label : social.name + ' — coming soon';
+      <!-- Navigation links -->
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+        <a href="/rss.xml">RSS</a>
+      </nav>
 
-							if (social.name === 'X') {
-								return isActive ? (
-									<a href={social.href} target="_blank" rel="noopener noreferrer" class="social-icon" aria-label={tooltip} title={tooltip}>
-										<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-											<path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-										</svg>
-									</a>
-								) : (
-									<span class="social-icon disabled" title={tooltip} aria-label={tooltip}>
-										<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-											<path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-										</svg>
-									</span>
-								);
-							}
+      <!-- Social links -->
+      <div class="footer-social" aria-label="Social media">
+        <!-- X (Twitter) -->
+        <a
+          href="https://x.com/Metronome_News"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="social-link"
+          aria-label="Follow Metronome News on X"
+          title="Follow on X"
+        >
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path
+              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+              fill="currentColor"
+            />
+          </svg>
+        </a>
 
-							if (social.name === 'Telegram') {
-								return isActive ? (
-									<a href={social.href} target="_blank" rel="noopener noreferrer" class="social-icon" aria-label={tooltip} title={tooltip}>
-										<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-											<path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
-										</svg>
-									</a>
-								) : (
-									<span class="social-icon disabled" title={tooltip} aria-label={tooltip}>
-										<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-											<path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
-										</svg>
-									</span>
-								);
-							}
+        <!-- CoinMarketCap -->
+        <a
+          href="https://coinmarketcap.com/community/profile/metronome_news/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="social-link"
+          aria-label="Follow Metronome News on CoinMarketCap"
+          title="Follow on CoinMarketCap"
+        >
+          <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <!-- Outer circle -->
+            <circle cx="16" cy="16" r="14" fill="none" stroke="currentColor" stroke-width="2" />
+            <!-- Stylized chart peaks (CMC signature element) -->
+            <path
+              d="M 8 20 L 12 14 L 16 18 L 20 12 L 24 16"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <!-- Small dot at the highest peak -->
+            <circle cx="20" cy="12" r="1.4" fill="currentColor" />
+          </svg>
+        </a>
+      </div>
+    </div>
 
-							if (social.name === 'GitHub') {
-								return (
-									<a href={social.href} target="_blank" rel="noopener noreferrer" class="social-icon" aria-label={tooltip} title={tooltip}>
-										<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-											<path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
-										</svg>
-									</a>
-								);
-							}
-						})}
-					</div>
-				</div>
-			</div>
-
-			<!-- Categories column -->
-			<div class="footer-column">
-				<h4 class="footer-heading">Categories</h4>
-				<ul class="footer-links">
-					{CATEGORIES.map((cat) => {
-						const href = "/" + cat.slug;
-						return (
-							<li><a href={href}>{cat.label}</a></li>
-						);
-					})}
-				</ul>
-			</div>
-
-			<!-- Metronome column -->
-			<div class="footer-column">
-				<h4 class="footer-heading">Metronome</h4>
-				<ul class="footer-links">
-					<li><a href="/about">About</a></li>
-					<li><a href="/contact">Contact</a></li>
-				</ul>
-			</div>
-
-			<!-- Legal column -->
-			<div class="footer-column">
-				<h4 class="footer-heading">Legal</h4>
-				<ul class="footer-links">
-					<li><a href="/privacy">Privacy policy</a></li>
-					<li><a href="/terms">Terms of use</a></li>
-				</ul>
-			</div>
-		</div>
-
-		<div class="footer-bottom">
-			<p class="footer-copyright">
-				© {currentYear} Metronome News. All rights reserved.
-			</p>
-			<p class="footer-made">
-				Built with Astro · Designed for readers, not algorithms.
-			</p>
-		</div>
-	</div>
+    <!-- Bottom bar -->
+    <div class="footer-bottom">
+      <div class="footer-copyright">
+        © 2026 Metronome News. All rights reserved.
+      </div>
+      <div class="footer-disclaimer">
+        Independent crypto journalism. No ads. No tracking. No algorithm.
+      </div>
+    </div>
+  </div>
 </footer>
 
 <style>
-	.site-footer {
-		margin-top: 5rem;
-		padding-block: 3rem 2rem;
-		background: var(--color-surface);
-		border-top: 1px solid var(--color-border);
-	}
+  .site-footer {
+    background: var(--color-bg-secondary, #1e293b);
+    border-top: 1px solid var(--color-border, #334155);
+    padding: 3rem 1.5rem 2rem 1.5rem;
+    margin-top: 4rem;
+    color: var(--color-text-secondary, #cbd5e1);
+  }
 
-	.footer-top {
-		display: grid;
-		grid-template-columns: 1.6fr 1fr 1fr 1fr;
-		gap: 2.5rem;
-		padding-bottom: 2.5rem;
-		border-bottom: 1px solid var(--color-border);
-	}
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
 
-	.footer-brand {
-		max-width: 320px;
-	}
+  .footer-top {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr auto;
+    gap: 2rem;
+    align-items: start;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--color-border, #334155);
+    margin-bottom: 1.5rem;
+  }
 
-	.footer-logo {
-		display: flex;
-		align-items: center;
-		gap: 0.6rem;
-		margin-bottom: 1rem;
-	}
-	.footer-icon {
-		width: 36px;
-		height: 36px;
-	}
-	.footer-logo-text {
-		display: flex;
-		flex-direction: column;
-		line-height: 1.05;
-	}
-	.footer-brand-name {
-		font-weight: 800;
-		font-size: 1.1rem;
-		letter-spacing: -0.02em;
-		background: var(--gradient-brand);
-		-webkit-background-clip: text;
-		background-clip: text;
-		color: transparent;
-	}
-	.footer-brand-sub {
-		font-size: 0.65rem;
-		font-weight: 500;
-		letter-spacing: 0.12em;
-		text-transform: uppercase;
-		color: var(--color-text-subtle);
-	}
+  /* Brand section */
+  .footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
 
-	.footer-tagline {
-		color: var(--color-text-muted);
-		font-size: 0.9rem;
-		line-height: 1.55;
-		margin-bottom: 1.25rem;
-	}
+  .footer-logo {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+  }
 
-	/* Social icons */
-	.footer-social {
-		margin-top: 0.5rem;
-	}
-	.footer-social-label {
-		display: block;
-		font-size: 0.7rem;
-		font-weight: 700;
-		letter-spacing: 0.1em;
-		text-transform: uppercase;
-		color: var(--color-text-subtle);
-		margin-bottom: 0.6rem;
-	}
-	.footer-social-icons {
-		display: flex;
-		gap: 0.5rem;
-		align-items: center;
-	}
-	.social-icon {
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		width: 36px;
-		height: 36px;
-		border-radius: 50%;
-		background: var(--color-surface-alt);
-		border: 1px solid var(--color-border);
-		color: var(--color-text-muted);
-		text-decoration: none;
-		transition: all 0.15s ease;
-		cursor: pointer;
-	}
-	.social-icon svg {
-		width: 16px;
-		height: 16px;
-	}
-	.social-icon:hover {
-		color: var(--color-accent);
-		border-color: var(--color-accent);
-		background: var(--color-surface);
-		transform: translateY(-2px);
-	}
-	.social-icon.disabled {
-		opacity: 0.4;
-		cursor: not-allowed;
-	}
-	.social-icon.disabled:hover {
-		transform: none;
-		color: var(--color-text-muted);
-		border-color: var(--color-border);
-		background: var(--color-surface-alt);
-	}
+  .footer-logo svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
 
-	.footer-heading {
-		font-size: 0.8rem;
-		font-weight: 700;
-		letter-spacing: 0.08em;
-		text-transform: uppercase;
-		color: var(--color-text-subtle);
-		margin-bottom: 1rem;
-	}
+  .footer-brand-text {
+    line-height: 1.3;
+  }
 
-	.footer-links {
-		list-style: none;
-		padding: 0;
-		margin: 0;
-		display: flex;
-		flex-direction: column;
-		gap: 0.5rem;
-	}
-	.footer-links a {
-		color: var(--color-text-muted);
-		text-decoration: none;
-		font-size: 0.9rem;
-		transition: color 0.15s;
-	}
-	.footer-links a:hover {
-		color: var(--color-accent);
-	}
+  .footer-brand-name {
+    font-size: 1.1rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #3b82f6 0%, #f97316 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: -0.02em;
+  }
 
-	.footer-bottom {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		margin-top: 2rem;
-		flex-wrap: wrap;
-		gap: 0.75rem;
-	}
-	.footer-copyright,
-	.footer-made {
-		font-size: 0.8rem;
-		color: var(--color-text-subtle);
-		margin: 0;
-	}
+  .footer-brand-tagline {
+    font-size: 0.78rem;
+    color: var(--color-text-tertiary, #94a3b8);
+    margin-top: 0.2rem;
+  }
 
-	@media (max-width: 900px) {
-		.footer-top {
-			grid-template-columns: 1fr 1fr;
-			gap: 2rem;
-		}
-		.footer-brand {
-			grid-column: 1 / -1;
-			max-width: none;
-		}
-	}
+  /* Navigation links */
+  .footer-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
+    align-self: center;
+  }
 
-	@media (max-width: 500px) {
-		.footer-top {
-			grid-template-columns: 1fr;
-		}
-		.footer-bottom {
-			justify-content: flex-start;
-		}
-	}
+  .footer-nav a {
+    color: var(--color-text-secondary, #cbd5e1);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.2s ease;
+  }
+
+  .footer-nav a:hover {
+    color: var(--color-accent, #3b82f6);
+  }
+
+  /* Social links */
+  .footer-social {
+    display: flex;
+    gap: 0.6rem;
+    align-self: center;
+  }
+
+  .social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--color-bg-primary, #0f172a);
+    border: 1px solid var(--color-border, #334155);
+    color: var(--color-text-secondary, #cbd5e1);
+    transition: all 0.2s ease;
+    text-decoration: none;
+  }
+
+  .social-link:hover {
+    background: linear-gradient(135deg, #3b82f6 0%, #f97316 100%);
+    color: white;
+    border-color: transparent;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  }
+
+  .social-link svg {
+    width: 18px;
+    height: 18px;
+    display: block;
+  }
+
+  /* Footer bottom */
+  .footer-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.75rem;
+    color: var(--color-text-tertiary, #94a3b8);
+  }
+
+  .footer-disclaimer {
+    text-align: right;
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 768px) {
+    .site-footer {
+      padding: 2rem 1rem 1.5rem 1rem;
+    }
+
+    .footer-top {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      text-align: center;
+    }
+
+    .footer-brand {
+      justify-content: center;
+    }
+
+    .footer-nav {
+      justify-content: center;
+    }
+
+    .footer-social {
+      justify-content: center;
+    }
+
+    .footer-bottom {
+      flex-direction: column;
+      text-align: center;
+      gap: 0.4rem;
+    }
+
+    .footer-disclaimer {
+      text-align: center;
+    }
+  }
 </style>

@@ -45,6 +45,7 @@ const articleUrl = new URL(Astro.url.pathname, Astro.site || 'https://metronome.
 <Layout
 	title={article.data.title + " — Metronome News"}
 	description={article.data.description}
+	image={article.data.image}
 	type="article"
 	publishDate={article.data.publishDate}
 	author={article.data.author}
