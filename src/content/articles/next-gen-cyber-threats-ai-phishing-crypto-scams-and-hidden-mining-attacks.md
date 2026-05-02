@@ -2,8 +2,7 @@
 title: "Next-Gen Cyber Threats: AI Phishing, Crypto Scams, and Hidden Mining Attacks"
 description: Cybersecurity experts report a surge in sophisticated attacks,
   including AI-powered phishing tools, global crackdowns on crypto fraud,
-  ransomware destroying data, and malware targeting gaming accounts. Here’s what
-  you need to know about the latest threats.
+  ransomware destroying data, and malware targeting gaming accounts.
 publishDate: 2026-05-02
 author: raptor
 category: web3
