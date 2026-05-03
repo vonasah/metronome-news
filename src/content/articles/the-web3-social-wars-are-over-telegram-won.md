@@ -13,7 +13,7 @@ tags:
   - ton
   - lens
   - socialfi
-image: /uploads/_6ab058ac-1fca-4062-8fd8-37056e866c7f-1-.jpg
+image: /uploads/_6ab058ac-1fca-4062-8fd8-37056e866c7f-1-.webp
 featured: false
 draft: false
 ---
