@@ -19,7 +19,7 @@ tags:
   - Aave
   - RWA
   - review
-image: /uploads/image29202619_40_57-1-.png
+image: /uploads/image29202619_40_57-1-.webp
 featured: false
 draft: false
 ---
