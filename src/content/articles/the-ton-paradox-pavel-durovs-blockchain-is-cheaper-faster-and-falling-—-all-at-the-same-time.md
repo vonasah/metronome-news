@@ -16,7 +16,7 @@ tags:
   - mtonga
   - catchain
   - free-speech
-image: /uploads/image-25-апр.-2026-г.-16_08_54.png
+image: /uploads/image-25-апр.-2026-г.-16_08_54.webp
 featured: false
 draft: false
 ---
