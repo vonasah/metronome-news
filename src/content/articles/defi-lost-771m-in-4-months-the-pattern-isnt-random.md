@@ -17,7 +17,7 @@ tags:
   - Sui
   - Syndicate
   - security
-image: /uploads/defi478-1-.png
+image: /uploads/defi478-1-.webp
 featured: false
 draft: false
 ---
