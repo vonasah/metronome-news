@@ -13,7 +13,7 @@ tags:
   - supply-shock
   - microstrategy
   - saylor
-image: /uploads/_e0fd08d9-4131-4d31-af5e-91b8cebab2a5-1-.jpg
+image: /uploads/_e0fd08d9-4131-4d31-af5e-91b8cebab2a5-1-.webp
 featured: false
 draft: false
 ---
