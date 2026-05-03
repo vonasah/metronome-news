@@ -17,7 +17,7 @@ tags:
   - Sybil resistance
   - Consensus 2026
   - DID
-image: /uploads/decentralized-identity-ai-bots-pi-network-2026.png
+image: /uploads/decentralized-identity-ai-bots-pi-network-2026.webp
 featured: false
 draft: false
 ---
