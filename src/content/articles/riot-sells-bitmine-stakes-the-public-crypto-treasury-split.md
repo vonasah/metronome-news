@@ -7,7 +7,7 @@ publishDate: 2026-05-01
 author: raptor
 category: market-analysis
 tags: []
-image: /uploads/btcethmar-1-.jpg
+image: /uploads/btcethmar-1-.webp
 featured: false
 draft: false
 ---
