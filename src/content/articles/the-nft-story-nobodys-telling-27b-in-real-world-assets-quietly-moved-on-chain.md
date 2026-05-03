@@ -14,7 +14,7 @@ tags:
   - blackrock
   - buidl
   - institutional
-image: /uploads/_1fa75395-7faf-4515-9fd7-38a4a35b579d-1-.jpg
+image: /uploads/_1fa75395-7faf-4515-9fd7-38a4a35b579d-1-.webp
 featured: false
 draft: false
 ---
