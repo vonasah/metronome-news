@@ -15,7 +15,7 @@ tags:
   - etf
   - stablecoins
   - "2026"
-image: /uploads/conceptual.png
+image: /uploads/conceptual.webp
 featured: true
 draft: false
 ---
