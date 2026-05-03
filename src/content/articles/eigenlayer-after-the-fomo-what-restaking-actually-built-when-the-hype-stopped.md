@@ -14,7 +14,7 @@ tags:
   - lrt
   - etherfi
   - kelp-dao
-image: /uploads/_ae8459f2-55bf-4308-8f39-d4374f59c9e8-1-.jpg
+image: /uploads/_ae8459f2-55bf-4308-8f39-d4374f59c9e8-1-.webp
 featured: false
 draft: false
 ---
