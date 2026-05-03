@@ -17,7 +17,7 @@ tags:
   - NEAR Protocol
   - agentic economy
   - machine payments
-image: /uploads/okx-agent-payments-protocol-web3-ai-agents.png
+image: /uploads/okx-agent-payments-protocol-web3-ai-agents.webp
 featured: false
 draft: false
 ---
