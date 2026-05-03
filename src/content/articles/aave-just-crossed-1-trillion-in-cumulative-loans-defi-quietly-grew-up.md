@@ -13,7 +13,7 @@ tags:
   - real-yield
   - tvl
   - rwa
-image: /uploads/_945cbd57-8730-4b10-9bb4-4fee70ae2705-1-.jpg
+image: /uploads/_945cbd57-8730-4b10-9bb4-4fee70ae2705-1-.webp
 featured: false
 draft: false
 ---
