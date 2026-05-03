@@ -17,7 +17,7 @@ tags:
   - bridges
   - Aave
   - security
-image: /uploads/chatgpt-image-1-мая-2026-г.-10_26_51-1-.png
+image: /uploads/april-2026-just-became-defi-s-most-hacked-month-in-history.webp
 featured: true
 draft: false
 ---
