@@ -18,24 +18,18 @@ const articlesAfterHero = heroArticle
 // Latest: 6 самых свежих статей (после Hero)
 const latestArticles = articlesAfterHero.slice(0, 6);
 
-// IDs статей которые уже показаны (Hero + Latest) — исключаем их из категорий
-const shownIds = new Set<string>();
-if (heroArticle) shownIds.add(heroArticle.id);
-latestArticles.forEach((a) => shownIds.add(a.id));
-
-// Для каждой категории — 3 свежие статьи которых ещё нет в Hero/Latest
+// Для каждой категории — 3 свежие статьи (БЕЗ исключения тех что в Hero/Latest).
+// Это правильное поведение для новостного сайта — категория всегда полная.
 const categorySections = CATEGORIES.map((cat) => {
-	const articles = articlesAfterHero
-		.filter((a) => a.data.category === cat && !shownIds.has(a.id))
+	const articles = allArticles
+		.filter((a) => a.data.category === cat)
 		.slice(0, 3);
 	return { category: cat, articles };
 }).filter((section) => section.articles.length > 0);
 
-// Precompute hero CSS class to avoid JSX parser quirks
 const heroCardClass = heroArticle?.data.image ? "hero-card has-image" : "hero-card";
 const heroHref = heroArticle ? "/article/" + heroArticle.id : "";
 
-// Форматирование даты
 function formatDate(date) {
 	return date.toLocaleDateString('en-US', {
 		year: 'numeric',
@@ -44,7 +38,6 @@ function formatDate(date) {
 	});
 }
 
-// Название категории с заглавной (e.g. "market-analysis" → "Market Analysis")
 function prettyCategory(slug) {
 	return slug
 		.split('-')
@@ -231,7 +224,6 @@ function prettyCategory(slug) {
 		box-shadow: 0 12px 32px rgba(59, 130, 246, 0.12);
 	}
 
-	/* Hero with image: two-column layout */
 	.hero-card.has-image {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
@@ -330,7 +322,7 @@ function prettyCategory(slug) {
 		transform: translateX(4px);
 	}
 
-	/* === LATEST (compact: photo + category + title only) === */
+	/* === LATEST === */
 	.latest {
 		margin-bottom: 4rem;
 	}
@@ -473,7 +465,7 @@ function prettyCategory(slug) {
 		margin-bottom: 1.5rem;
 	}
 
-	/* === ARTICLE CARDS (used inside category sections) === */
+	/* === ARTICLE CARDS === */
 	.article-grid {
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
@@ -603,7 +595,6 @@ function prettyCategory(slug) {
 		}
 	}
 
-	/* Mobile: compact cards + smaller hero */
 	@media (max-width: 640px) {
 		.home {
 			padding-block: 1.5rem 3rem;
@@ -668,7 +659,6 @@ function prettyCategory(slug) {
 			font-size: 0.8rem;
 		}
 
-		/* Compact category cards: image on the left, text on the right */
 		.article-grid {
 			grid-template-columns: 1fr;
 			gap: 0.75rem;
