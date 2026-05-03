@@ -12,7 +12,7 @@ tags:
   - AI
   - crypto fraud
   - WEB3
-image: /uploads/a54f96e5-edd6-41e3-be3b-4d4a5a0b830d-1-.png
+image: /uploads/a54f96e5-edd6-41e3-be3b-4d4a5a0b830d-1-.webp
 featured: false
 draft: false
 ---
