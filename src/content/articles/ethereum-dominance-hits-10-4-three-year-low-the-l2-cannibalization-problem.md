@@ -13,7 +13,7 @@ tags:
   - arbitrum
   - vitalik
   - dominance
-image: /uploads/_9108eb15-22af-4305-80f5-dc16d02966e0-1-.jpg
+image: /uploads/_9108eb15-22af-4305-80f5-dc16d02966e0-1-.webp
 featured: false
 draft: false
 ---
