@@ -17,7 +17,7 @@ tags:
   - Senate Banking Committee
   - GENIUS Act
   - banking lobby
-image: /uploads/clarity-act-stablecoin-yield-compromise-coinbase.png
+image: /uploads/clarity-act-stablecoin-yield-compromise-coinbase.webp
 featured: true
 draft: false
 ---
