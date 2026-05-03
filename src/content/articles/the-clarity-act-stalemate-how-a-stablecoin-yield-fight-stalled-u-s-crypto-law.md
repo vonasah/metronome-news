@@ -14,7 +14,7 @@ tags:
   - coinbase
   - stablecoins
   - genius-act
-image: /uploads/_b49fd550-9094-4123-9feb-7154e6f0a639-1-.jpg
+image: /uploads/_b49fd550-9094-4123-9feb-7154e6f0a639-1-.webp
 featured: false
 draft: false
 ---
