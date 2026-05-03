@@ -12,7 +12,7 @@ tags:
   - cryptopunks
   - utility
   - k-shaped-recovery
-image: /uploads/_6a90f405-d848-4a5e-ba69-6eee34e4bd40-1-.jpg
+image: /uploads/_6a90f405-d848-4a5e-ba69-6eee34e4bd40-1-.webp
 featured: false
 draft: false
 ---
