@@ -17,7 +17,7 @@ tags:
   - BlackRock
   - ETF
   - Hegotá
-image: /uploads/ethereum-april-2026-fed-glamsterdam-staking.png
+image: /uploads/ethereum-april-2026-fed-glamsterdam-staking.webp
 featured: false
 draft: false
 ---
