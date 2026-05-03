@@ -17,7 +17,7 @@ tags:
   - crypto-politics
   - 2029-investigations
   - ""
-image: /uploads/_a5d5fbc7-0a1.jpg
+image: /uploads/_a5d5fbc7-0a1.webp
 featured: false
 draft: false
 ---
