@@ -19,7 +19,7 @@ tags:
   - airdrop
   - blockchain gaming
   - review
-image: /uploads/ronin-1-.png
+image: /uploads/ronin-1-.webp
 featured: false
 draft: false
 ---
