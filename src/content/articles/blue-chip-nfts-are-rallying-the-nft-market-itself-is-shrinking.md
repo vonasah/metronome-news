@@ -17,7 +17,7 @@ tags:
   - blue chips
   - token unlock
   - Canary Capital ETF
-image: /uploads/nft-blue-chip-rally-shrinking-market-2026.png
+image: /uploads/nft-blue-chip-rally-shrinking-market-2026.webp
 featured: false
 draft: false
 ---
