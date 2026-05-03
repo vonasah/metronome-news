@@ -14,7 +14,7 @@ tags:
   - dex
   - derivatives
   - hype
-image: /uploads/_418b143f-d36f-4990-8a43-6536606ba088-1-.jpg
+image: /uploads/_418b143f-d36f-4990-8a43-6536606ba088-1-.webp
 featured: false
 draft: false
 ---
