@@ -15,7 +15,7 @@ tags:
   - Trump crypto
   - SEC
   - World Liberty Financial
-image: /uploads/eric-1-.png
+image: /uploads/eric-1-.webp
 featured: true
 draft: false
 ---
