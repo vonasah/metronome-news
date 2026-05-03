@@ -17,7 +17,7 @@ tags:
   - Treasuries
   - CLARITY Act
   - Project Crypto
-image: /uploads/dtcc-tokenization-no-action-letter-rwa-2026.png
+image: /uploads/dtcc-tokenization-no-action-letter-rwa-2026.webp
 featured: true
 draft: false
 ---
