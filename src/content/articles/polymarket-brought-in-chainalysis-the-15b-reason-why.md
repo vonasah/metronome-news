@@ -17,7 +17,7 @@ tags:
   - BETS OFF Act
   - Van Dyke
   - regulation
-image: /uploads/chatgpt-image-30-апр.-2026-г.-20_18_00-1-.png
+image: /uploads/chatgpt-image-30-апр.-2026-г.-20_18_00-1-.webp
 featured: false
 draft: false
 ---
