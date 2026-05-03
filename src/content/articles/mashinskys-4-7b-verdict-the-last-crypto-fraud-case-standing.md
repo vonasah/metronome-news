@@ -17,7 +17,7 @@ tags:
   - Tether lawsuit
   - Trump crypto
   - Bankman-Fried
-image: /uploads/chatgpt-image-30-апр.-2026-г.-09_44_50-1-.png
+image: /uploads/chatgpt-image-30-апр.-2026-г.-09_44_50-1-.webp
 featured: true
 draft: false
 ---
