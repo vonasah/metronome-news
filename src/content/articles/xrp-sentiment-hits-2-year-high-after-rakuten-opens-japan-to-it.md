@@ -16,7 +16,7 @@ tags:
   - CLARITY Act
   - ETF
   - whale accumulation
-image: /uploads/_5af4f123-3620-460f-9b17-879e0b6cb0f6-1-.jpg
+image: /uploads/_5af4f123-3620-460f-9b17-879e0b6cb0f6-1-.webp
 featured: false
 draft: false
 ---
