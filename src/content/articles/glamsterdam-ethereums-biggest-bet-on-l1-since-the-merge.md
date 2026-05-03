@@ -13,7 +13,7 @@ tags:
   - vitalik
   - l1-scaling
   - epbs
-image: /uploads/_76aa2ff9-273a-42f7-ac78-43b9be337bfb-1-.jpg
+image: /uploads/_76aa2ff9-273a-42f7-ac78-43b9be337bfb-1-.webp
 featured: false
 draft: false
 ---
