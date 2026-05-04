@@ -2,7 +2,7 @@
 title: Bitmine Just Hit 4.29% of All ETH. Tom Lee Calls It "Crypto Spring"
 description: Bitmine bought another 101,745 ETH, bringing total holdings to
   5.18M tokens — 4.29% of all Ethereum supply. Tom Lee says crypto spring has
-  started. The validator concentration question doesn't go away.
+  started. The validator concentration question doesn't go away
 publishDate: 2026-05-04
 author: raptor
 category: ethereum
