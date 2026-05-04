@@ -18,7 +18,7 @@
 <script is:inline>
 function addCopyUrlButton() {
   const checkInterval = setInterval(() => {
-    const toolbar = document.querySelector('[class*="EditorToolbar"]');
+  const toolbar = document.querySelector('[class*="ToolbarSectionMain"]');
     if (!toolbar || document.getElementById('copy-url-btn')) return;
 
     const btn = document.createElement('button');
