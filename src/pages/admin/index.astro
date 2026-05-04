@@ -1,20 +1,74 @@
 ---
 // Admin page for Decap CMS
-// This is served at /admin/ and loads the CMS interface from a CDN.
-// The `prerender` flag makes it a static page (no server needed).
-export const prerender = true;
 ---
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<meta name="robots" content="noindex" />
-	<title>Metronome News — Admin</title>
-	<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Metronome News — Admin</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
 </head>
 <body>
-	<!-- Decap CMS mounts here automatically -->
-	<script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js" is:inline></script>
+<!-- Decap CMS mounts here automatically -->
+<script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+
+<script is:inline>
+function addCopyUrlButton() {
+  const checkInterval = setInterval(() => {
+    const toolbar = document.querySelector('[class*="EditorToolbar"]');
+    if (!toolbar || document.getElementById('copy-url-btn')) return;
+
+    const btn = document.createElement('button');
+    btn.id = 'copy-url-btn';
+    btn.type = 'button';
+    btn.style.cssText = `
+      background: linear-gradient(135deg, #3b82f6 0%, #f97316 100%);
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-left: 12px;
+      font-size: 13px;
+      transition: transform 0.15s;
+      font-family: inherit;
+    `;
+    btn.innerText = '📋 Copy URL';
+    btn.onmouseover = () => btn.style.transform = 'translateY(-1px)';
+    btn.onmouseout = () => btn.style.transform = 'translateY(0)';
+
+    btn.onclick = () => {
+      const url = window.location.href;
+      const match = url.match(/entries\/([^?#\/]+)/);
+      if (!match) {
+        alert('Cannot detect article slug. Please save the article first.');
+        return;
+      }
+      const slug = match[1];
+      const articleUrl = `https://metronome.news/article/${slug}/`;
+      navigator.clipboard.writeText(articleUrl).then(() => {
+        btn.innerText = '✅ Copied!';
+        btn.style.background = '#10b981';
+        setTimeout(() => {
+          btn.innerText = '📋 Copy URL';
+          btn.style.background = 'linear-gradient(135deg, #3b82f6 0%, #f97316 100%)';
+        }, 2000);
+      }).catch(err => {
+        alert('Copy failed: ' + err.message);
+      });
+    };
+
+    toolbar.appendChild(btn);
+    clearInterval(checkInterval);
+  }, 500);
+}
+
+window.addEventListener('load', addCopyUrlButton);
+document.addEventListener('click', () => setTimeout(addCopyUrlButton, 300));
+</script>
 </body>
 </html>
