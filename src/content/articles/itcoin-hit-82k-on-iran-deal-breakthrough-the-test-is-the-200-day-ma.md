@@ -1,5 +1,5 @@
 ---
-title: itcoin Hit $82K on Iran Deal Breakthrough. The Test Is the 200-Day MA
+title: Bitcoin Hit $82K on Iran Deal Breakthrough. The Test Is the 200-Day MA
 description: BTC jumped to $82,094 after Axios reported a 14-point US-Iran peace
   memo with 48 hours to Iranian response. The 200-day moving average at $82,228
   is the level that decides everything next.
