@@ -2,7 +2,7 @@
 title: The Bitcoin Treasury Company Model Is Breaking. Here's the Math
 description: Strategy reported a $12.54B Q1 loss. Sequans sold half its BTC.
   Benchmark cut MSTR to $570. The treasury company model that drove 2024-2025
-  institutional demand is visibly under stress. What replaces it?
+  institutional...
 publishDate: 2026-05-07
 author: raptor
 category: bitcoin
